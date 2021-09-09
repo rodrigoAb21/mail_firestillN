@@ -67,7 +67,15 @@ public class NegocioContrato {
         return lista;
     }
     
+    public String obtenerContratoHTML(int id){
+        String html="";
+        return html;
+    }
     
+    public String obtenerContratosHTML(){
+        String html="";
+        return html;
+    }
     
     
 }

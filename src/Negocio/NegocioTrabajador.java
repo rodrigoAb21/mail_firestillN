@@ -69,10 +69,53 @@ public class NegocioTrabajador {
     }
     
     public String obtenerTrabajadoresHTML(){
-        DatosTrabajador datosTrabajador = new DatosTrabajador();
-        ArrayList<DatosTrabajador> lista= obtenerTrabajadores();
+        DatosTrabajador datosTrabajador= new DatosTrabajador();
+        ArrayList<DatosTrabajador> lista = datosTrabajador.obtener();
         String html="";
-        //COMPLETAARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+        
+        String contenido="";
+        for (DatosTrabajador trabajador : lista) {
+            Integer id= trabajador.getId();
+            String nombre=trabajador.getNombre();
+            String apellido=trabajador.getApellido();
+            String carnet=trabajador.getCarnet();
+            String telefono=trabajador.getTelefono();
+            String direccion=trabajador.getDireccion();
+            String tipo=trabajador.getTipo();
+            String email=trabajador.getEmail();
+            
+            contenido+="<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
+                       "<td >"+nombre+"</td>\n" +
+                       "<td >"+apellido+"</td>\n" +
+                       "<td >"+tipo+"</td>\n" +
+                       "<td >"+telefono+"</td>\n" +
+                       "<td >"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= editarTrabajador:"+nombre+", "+apellido+","+direccion+","+carnet+","+telefono+","+email+","+"Nueva password"+"\">Editar </a>\n" +
+                             "</li>"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= eliminarTrabajador:"+id+"\">Eliminar </a>\n" +
+                             "</li>"+
+                       "</td>\n" +
+                       "</tr>\n";
+        }
+        
+        html="<table class=\"tablaTecno\">\n" +
+            "  <thead>\n" +
+            "    <tr class=\"trCamposTecno\">\n" +
+            "      <th >ID</th>\n"+
+            "      <th class=\"thcolxTecno\">Nombre</th>\n" +
+            "      <th class=\"thcolxTecno\">Apellido</th>\n" +
+            "      <th class=\"thcolxTecno\">Tipo</th>\n" +
+            "      <th class=\"thcolxTecno\">Telefono</th>\n" +    
+            "      <th class=\"thcolxTecno\">Opciones</th>\n" +                
+            "    </tr>\n" +
+            "  </thead>\n" +
+            "  <tbody>\n" +    
+                contenido+
+            "  </tbody>\n" +
+            "</table>";
         return html;
     }
     

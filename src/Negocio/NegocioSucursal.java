@@ -53,6 +53,15 @@ public class NegocioSucursal {
         return lista;
     }
     
+    public String obtenerSucursalHTML(Integer id){
+        String html= " ";
+        return html;
+    }
+    
+    public String obtenerSucursalesHTML(){
+        String html= " ";
+        return html;
+    }
     
     
     

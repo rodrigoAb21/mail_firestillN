@@ -97,7 +97,7 @@ public class NegocioFichaTecnica {
         return lista;
     }
     
-    public String obtenerTipoClasificacionHTML(int id){
+    public String obtenerFichaTecnicaHTML(int id){
         DatosFichaTecnica datosFichaTecnica= new DatosFichaTecnica();
         datosFichaTecnica = datosFichaTecnica.obtener(id);
         String html="";
@@ -108,7 +108,7 @@ public class NegocioFichaTecnica {
         
     }
     
-    public String obtenerTiposClasificacionHTML(){
+    public String obtenerFichasTecnicasHTML(){
         DatosFichaTecnica datosFichaTecnica= new DatosFichaTecnica();
         ArrayList<DatosFichaTecnica> lista = datosFichaTecnica.obtener();
         String html="";

@@ -131,4 +131,19 @@ public class DatosIngresoProducto extends Tabla{
         }
         return lista;
     }
+    
+    public DatosIngresoProducto obtener(int id){
+        return (DatosIngresoProducto)obtenerTupla(id);
+    }
+    
+    public ArrayList<DatosIngresoProducto> obtener(){
+        ArrayList<DatosIngresoProducto> lista=new ArrayList<DatosIngresoProducto>();
+        for (Object object : obtenertLista()) {
+            DatosIngresoProducto datosIngresoProducto= new DatosIngresoProducto();
+            datosIngresoProducto= (DatosIngresoProducto) object;
+            lista.add(datosIngresoProducto);
+        }
+        return lista;
+    }
+    
 }
