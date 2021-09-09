@@ -15,6 +15,8 @@ import Negocio.NegocioCliente;
 import Negocio.NegocioConfig;
 import Negocio.NegocioContrato;
 import Negocio.NegocioEquipo;
+import Negocio.NegocioFichaTecnica;
+import Negocio.NegocioIngresoProducto;
 import Negocio.NegocioMarcaClasificacion;
 import Negocio.NegocioProducto;
 import Negocio.NegocioProveedor;
@@ -876,16 +878,49 @@ public class ComandoFirestill {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void eliminarProducto(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private void eliminarProducto(String data) {
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioProducto negocioProducto= new NegocioProducto();
+            negocioProducto.eliminar(id);
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","El producto fue eliminado.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+    }    
 
-    private void mostrarProducto(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void mostrarProducto(String data) {
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioProducto negocioProducto= new NegocioProducto();
+            String html=negocioProducto.obtenerProductoHTML(id);
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
 
     private void listarProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            NegocioProducto negocioProducto= new NegocioProducto();
+            String html=negocioProducto.obtenerProductosHTML();
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
 
     
@@ -909,16 +944,49 @@ public class ComandoFirestill {
         }
     }
 
-    private void eliminarBajaProducto(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private void eliminarBajaProducto(String data) {
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioBajaProducto negocioBajaProducto= new NegocioBajaProducto();
+            negocioBajaProducto.eliminar(id);
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","La baja de producto fue eliminada.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+    }    
 
-    private void mostrarBajaProducto(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void mostrarBajaProducto(String data) {
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioBajaProducto negocioBajaProducto= new NegocioBajaProducto();
+            String html=negocioBajaProducto.obtenerBajaProductoHTML(id);
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
 
     private void listarBajaProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            NegocioBajaProducto negocioBajaProducto= new NegocioBajaProducto();
+            String html=negocioBajaProducto.obtenerBajaProductosHTML();
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
 
     
@@ -942,20 +1010,53 @@ public class ComandoFirestill {
         }
     }
 
-    private void editarContrato(String string) {
+    private void editarContrato(String data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void eliminarContrato(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private void eliminarContrato(String data) {
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioContrato negocioContrato= new NegocioContrato();
+            negocioContrato.eliminar(id);
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","El contrato fue eliminado.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+    }    
 
-    private void mostrarContrato(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void mostrarContrato(String data) {
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioContrato negocioContrato= new NegocioContrato();
+            String html=negocioContrato.obtenerContratoHTML(id);
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
-
+    
     private void listarContratos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            NegocioContrato negocioContrato= new NegocioContrato();
+            String html=negocioContrato.obtenerContratosHTML();
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
 
     
@@ -978,41 +1079,78 @@ public class ComandoFirestill {
         }
     }
 
-    private void editarSucursal(String string) {
+    private void editarSucursal(String data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void eliminarSucursal(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void mostrarSucursal(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void listarSucursales() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    // 11 Equipo
-
-    private void registrarEquipo(String data) {
-        /*
+    private void eliminarSucursal(String data) {
         String[] values = data.split(",");
         try {
-            Integer sucursal_id = getInteger_NOT_NULL(values[0]);
-            String nro_serie = getString_NOT_NULL(values[1]);
-            String direccion = getString_NOT_NULL(values[2]);
-            NegocioEquipo negocioEquipo= new NegocioEquipo();
-            Integer id = negocioEquipo.registrar(contrato_id,nombre, direccion );
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioSucursal negocioSucursal= new NegocioSucursal();
+            negocioSucursal.eliminar(id);
             ClienteSMTP mensajero= new ClienteSMTP();
-            mensajero.enviarMensaje(correo, "","La sucursal fue registrada exitosamente.");
+            mensajero.enviarMensaje(correo, "","La sucursal fue eliminada.");
         } catch (Exception e) {
             System.out.println("Error al catch de firestill");
             ClienteSMTP mensajero= new ClienteSMTP();
             mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
         }
-*/
+    } 
+
+    private void mostrarSucursal(String data) {
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioSucursal negocioSucursal= new NegocioSucursal();
+            String html=negocioSucursal.obtenerSucursalHTML(id);
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+    }
+
+    private void listarSucursales() {
+        try {
+            NegocioSucursal negocioSucursal= new NegocioSucursal();
+            String html=negocioSucursal.obtenerSucursalesHTML();
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+    }
+    
+    // 11 Equipo
+
+    private void registrarEquipo(String data) {
+        String[] values = data.split(",");
+        try {
+            Integer sucursal_id = getInteger_NOT_NULL(values[0]);
+            Integer tipo_clasificacion_id = getInteger_NOT_NULL(values[1]);
+            Integer marca_clasificacion_id = getInteger_NOT_NULL(values[2]);
+            String nro_serie = getString_NOT_NULL(values[3]);
+            String descripcion = getString(values[4]);
+            String unidad_medida = getString(values[5]);
+            Integer ano_fabricacion= getInteger_NOT_NULL(values[6]);
+            Float capacidad= getFloat_NOT_NULL(values[7]);
+            String ubicacion= getString_NOT_NULL(values[7]);
+            NegocioEquipo negocioEquipo= new NegocioEquipo();
+            Integer id = negocioEquipo.registrar(sucursal_id, tipo_clasificacion_id, marca_clasificacion_id, nro_serie, descripcion, unidad_medida, ano_fabricacion, capacidad, ubicacion);
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","El equipo fue registrado exitosamente.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
 
     private void editarEquipo(String data) {
@@ -1020,55 +1158,153 @@ public class ComandoFirestill {
     }
 
     private void eliminarEquipo(String data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioEquipo negocioEquipo= new NegocioEquipo();
+            negocioEquipo.eliminar(id);
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","El equipo fue eliminado.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+    } 
 
     private void mostrarEquipo(String data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioEquipo negocioEquipo= new NegocioEquipo();
+            String html=negocioEquipo.obtenerEquipoHTML(id);
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
 
     private void listarEquipos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            NegocioEquipo negocioEquipo= new NegocioEquipo();
+            String html=negocioEquipo.obtenerEquiposHTML();
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
 
     
     // 12 Ficha Tecnica
     
-    private void registrarFichaTecnica(String string) {
+    private void registrarFichaTecnica(String data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void eliminarFichaTecnica(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private void eliminarFichaTecnica(String data) {
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioFichaTecnica negocioFichaTecnica= new NegocioFichaTecnica();
+            negocioFichaTecnica.eliminar(id);
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","La ficha tecnica fue eliminada.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+    } 
 
-    private void mostrarFichaTecnica(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void mostrarFichaTecnica(String data) {
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioFichaTecnica negocioFichaTecnica= new NegocioFichaTecnica();
+            String html=negocioFichaTecnica.obtenerFichaTecnicaHTML(id);
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
 
     private void listarFichasTecnicas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            NegocioFichaTecnica negocioFichaTecnica= new NegocioFichaTecnica();
+            String html=negocioFichaTecnica.obtenerFichasTecnicasHTML();
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
 
     
     // 13 Ingreso Producto
     
-    private void registrarIngresoProducto(String string) {
+    private void registrarIngresoProducto(String data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void eliminarIngresoProducto(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private void eliminarIngresoProducto(String data) {
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioIngresoProducto negocioIngresoProducto= new NegocioIngresoProducto();
+            negocioIngresoProducto.eliminar(id);
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","El ingreso de productos fue eliminado.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+    } 
 
-    private void mostrarIngresoProducto(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void mostrarIngresoProducto(String data) {
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioIngresoProducto negocioIngresoProducto= new NegocioIngresoProducto();
+            String html=negocioIngresoProducto.obtenerIngresoProductoHTML(id);
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
 
     private void listarIngresosProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            NegocioIngresoProducto negocioIngresoProducto= new NegocioIngresoProducto();
+            String html=negocioIngresoProducto.obtenerIngresosProductosHTML();
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
-    
     
     
     

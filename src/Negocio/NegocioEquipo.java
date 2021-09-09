@@ -68,7 +68,15 @@ public class NegocioEquipo {
         return lista;
     }
     
+    public String obtenerEquipoHTML(Integer id){
+        String html= " ";
+        return html;
+    }
     
+    public String obtenerEquiposHTML(){
+        String html= " ";
+        return html;
+    }
     
     
 }
