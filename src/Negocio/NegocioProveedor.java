@@ -85,13 +85,63 @@ public class NegocioProveedor {
     }
     
     public String obtenerProveedoresHTML(){
-        DatosProveedor datosProveedor= new DatosProveedor();
-        ArrayList<DatosProveedor> lista = datosProveedor.obtener();
+        DatosProveedor datosProveedor = new DatosProveedor();
+        ArrayList<DatosProveedor> lista= datosProveedor.obtener();
         String html="";
         
-        //faltaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        String contenido="";
+        for (DatosProveedor proveedor : lista) {
+            Integer id= proveedor.getId();
+            String nombre= proveedor.getNombre();
+            String nit= proveedor.getNit();
+            String email= proveedor.getEmail();
+            String direccion=proveedor.getDireccion();
+            String telefono=proveedor.getTelefono();
+            String informacion=proveedor.getInformacion();
+            String titular=proveedor.getTitular();
+            String banco= proveedor.getBanco();
+            String sucursal= proveedor.getSucursal();
+            String nro_cuenta= proveedor.getNro_cuenta();
+            String moneda= proveedor.getMoneda();
+            String tipo_identificacion= proveedor.getTipo_identificacion();
+            String nro_identificacion= proveedor.getNro_identificacion();
+            
+            contenido+="<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
+                       "<td >"+nombre+"</td>\n" +
+                       "<td >"+telefono+"</td>\n" +       
+                       "<td >"+email+"</td>\n" +      
+                       "<td >"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarProveedor:"+id+"\">Mostrar </a>\n" +
+                             "</li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= editarProveedor:"+id+", "+nombre+", "+nit+", "+email+", "+direccion+", "+telefono+", "+informacion+","+titular+", "+banco+", "+sucursal+", "+nro_cuenta+", "+moneda+", "+ tipo_identificacion+", "+nro_identificacion+"\">Editar </a>\n" +
+                             "</li>"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= eliminarProveedor:"+id+"\">Eliminar </a>\n" +
+                             "</li>"+
+                       "</td>\n" +
+                       "</tr>\n";
+        }
+        
+        html="<h2>Trabajadores</h2>"+
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarProveedor: NOMBRE, NIT, EMAIL, DIRECCION, TELEFONO, INFORMACION, TITULAR, BANCO, SUCURSAL, NRO_CUENTA, MONEDA, TIPO_IDENTIFICACION, NRO_IDENTIFICACION\">Registrar Proveedor</a><br>" +
+            "<table class=\"tablaTecno\">\n" +
+            "  <thead>\n" +
+            "    <tr class=\"trCamposTecno\">\n" +
+            "      <th >ID</th>\n"+
+            "      <th class=\"thcolxTecno\">Nombre</th>\n" +
+            "      <th class=\"thcolxTecno\">Telefono</th>\n" +
+            "      <th class=\"thcolxTecno\">Email</th>\n" +   
+            "      <th class=\"thcolxTecno\">Opciones</th>\n" +                
+            "    </tr>\n" +
+            "  </thead>\n" +
+            "  <tbody>\n" +    
+                contenido+
+            "  </tbody>\n" +
+            "</table>";
+        
         
         return html;
-        
     }
 }

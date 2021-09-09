@@ -127,15 +127,15 @@ public class ComandoFirestill {
                     registrarTrabajador(s[1], "Tecnico");
                     break;
                     
-                    case "eliminarTrabajador":
+                    case "eliminartrabajador":
                     eliminarTrabajador(s[1]);
                     break;
                     
-                    case "mostrarTrabajador":
+                    case "mostrartrabajador":
                     mostrarTrabajador(s[1]);
                     break;
                     
-                    case "listarTrabajadores":
+                    case "listartrabajadores":
                     listarTrabajadores();
                     break;
                     

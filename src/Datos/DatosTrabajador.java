@@ -146,11 +146,13 @@ public class DatosTrabajador extends Tabla{
     @Override
      String getSqlUpdate() {
         String sql = "UPDATE "+getNombreTabla()+" SET "
-                + "nombre="+getSQLString(this.nombre)
-                + "apellido="+getSQLString(this.apellido)
-                + "carnet="+getSQLString(this.carnet)
-                + "telefono="+getSQLString(this.telefono)
-                + "direccion="+getSQLString(this.direccion)
+                + "nombre="+getSQLString(this.nombre)+","
+                + "apellido="+getSQLString(this.apellido)+","
+                + "carnet="+getSQLString(this.carnet)+","
+                + "telefono="+getSQLString(this.telefono)+","
+                + "direccion="+getSQLString(this.direccion)+","
+                + "email="+getSQLString(this.email)+","
+                + "password="+getSQLString(this.password)+" "
                 + "where id="+ getSQLString(this.id)+";";
         return sql;
     }
@@ -175,6 +177,7 @@ public class DatosTrabajador extends Tabla{
                 trabajador.id=resultado.getInt("id");
                 trabajador.nombre=resultado.getString("nombre");
                 trabajador.apellido=resultado.getString("apellido");
+                trabajador.tipo=resultado.getString("tipo");
                 trabajador.carnet=resultado.getString("carnet");
                 trabajador.telefono=resultado.getString("telefono");
                 trabajador.direccion=resultado.getString("direccion");
