@@ -23,5 +23,6 @@
 hs_err_pid*
 *.xml
 *.properties
-dist/README.TXT
+dist/
 manifest.mf
+build/
