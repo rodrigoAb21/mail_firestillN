@@ -27,3 +27,5 @@ dist/
 manifest.mf
 build/
 nbproject/
+*.iml
+.idea/
