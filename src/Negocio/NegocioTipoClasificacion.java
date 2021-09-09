@@ -67,6 +67,14 @@ public class NegocioTipoClasificacion {
              "    <tr class=\"trDatosTecno\">\n" +
              "      <td class=\"tdcol1Tecno\">"+datosTipoClasificacion.getId()+"</td>\n" +
              "      <td >"+datosTipoClasificacion.getNombre()+"</td>\n" +
+                "      <td >"+datosTipoClasificacion.getNombre()+"</td>\n" +
+                "      <td >"+datosTipoClasificacion.getNombre()+"</td>\n" +
+                "      <td >"+datosTipoClasificacion.getNombre()+"</td>\n" +
+                "      <td >"+datosTipoClasificacion.getNombre()+"</td>\n" +
+                "      <td >"+datosTipoClasificacion.getNombre()+"</td>\n" +
+                "      <td >"+datosTipoClasificacion.getNombre()+"</td>\n" +
+                "      <td >"+datosTipoClasificacion.getNombre()+"</td>\n" +
+                "      <td >"+datosTipoClasificacion.getNombre()+"</td>\n" +
              "    </tr>\n" +
              "  </tbody>\n" +
              "</table>";
@@ -108,8 +116,6 @@ public class NegocioTipoClasificacion {
                 contenido+
             "  </tbody>\n" +
             "</table>";
-        
-        
         return html;
         
     }

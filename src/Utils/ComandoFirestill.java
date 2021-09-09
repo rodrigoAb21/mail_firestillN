@@ -123,7 +123,7 @@ public class ComandoFirestill {
                     registrarTrabajador(s[1], "Venta");
                     break;
                     
-                    case "registrartrabajadormantenimiento":
+                    case "registrartrabajadortecnico":
                     registrarTrabajador(s[1], "Tecnico");
                     break;
                     
@@ -331,7 +331,8 @@ public class ComandoFirestill {
                     
             }
         } catch (Exception e) {
-            System.out.println("Error de Comando");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo,"","Verifique los datos enviados.");
         }
     }
 
