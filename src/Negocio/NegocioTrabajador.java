@@ -79,7 +79,7 @@ public class NegocioTrabajador {
     public static void main(String[] args) {
      
         DatosTrabajador dt= new DatosTrabajador();
-        dt = dt.obtenerXcorreo("alejandra@gmail.com");
+        dt = dt.obtenerXcorreo("admin@gmail.com");
         System.out.println(dt.getNombre()+"-"+dt.getApellido());
     }
 }

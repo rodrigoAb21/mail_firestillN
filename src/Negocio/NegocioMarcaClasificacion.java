@@ -55,22 +55,13 @@ public class NegocioMarcaClasificacion {
     public String obtenerMarcaClasificacionHTML(int id){
         DatosMarcaClasificacion datosMarcaClasificacion= new DatosMarcaClasificacion();
         datosMarcaClasificacion = datosMarcaClasificacion.obtener(id);
-        String html="";
-        html="<table class=\"tablaTecno\">\n" +
-             "  <thead>\n" +
-             "    <tr class=\"trCamposTecno\">\n" +
-             "      <th >ID</th>\n"+
-             "      <th class=\"thcolxTecno\">Nombre</th>\n" +
-             "    </tr>\n" +
-             "  </thead>\n" +
-             "  <tbody>\n" +    
-             "    <tr class=\"trDatosTecno\">\n" +
-             "      <td class=\"tdcol1Tecno\">"+datosMarcaClasificacion.getId()+"</td>\n" +
-             "      <td >"+datosMarcaClasificacion.getNombre()+"</td>\n" +
-             "    </tr>\n" +
-             "  </tbody>\n" +
-             "</table>";
-        
+        String html = "<h2>Ver Marca de clasificacion: "+datosMarcaClasificacion.getId()+"</h2>\n" +
+                "<div class=\"tecno_recuadro\">\n" +
+                "    <label><b>Nombre</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosMarcaClasificacion.getNombre()+"</p>\n" +
+                "</div>\n";
+
+
         return html;
         
     }

@@ -55,22 +55,13 @@ public class NegocioTipoClasificacion {
     public String obtenerTipoClasificacionHTML(int id){
         DatosTipoClasificacion datosTipoClasificacion= new DatosTipoClasificacion();
         datosTipoClasificacion = datosTipoClasificacion.obtener(id);
-        String html="";
-        html="<table class=\"tablaTecno\">\n" +
-             "  <thead>\n" +
-             "    <tr class=\"trCamposTecno\">\n" +
-             "      <th >ID</th>\n"+
-             "      <th class=\"thcolxTecno\">Nombre</th>\n" +
-             "    </tr>\n" +
-             "  </thead>\n" +
-             "  <tbody>\n" +    
-             "    <tr class=\"trDatosTecno\">\n" +
-             "      <td class=\"tdcol1Tecno\">"+datosTipoClasificacion.getId()+"</td>\n" +
-             "      <td >"+datosTipoClasificacion.getNombre()+"</td>\n" +
-             "    </tr>\n" +
-             "  </tbody>\n" +
-             "</table>";
-        
+        String html = "<h2>Ver Tipo de clasificacion: "+datosTipoClasificacion.getId()+"</h2>\n" +
+                "<div class=\"tecno_recuadro\">\n" +
+                "    <label><b>Nombre</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosTipoClasificacion.getNombre()+"</p>\n" +
+                "</div>\n";
+
+
         return html;
         
     }

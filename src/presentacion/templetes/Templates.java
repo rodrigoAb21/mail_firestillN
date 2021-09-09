@@ -205,4 +205,36 @@ public class Templates {
         
         return "";
     }
+
+    public String generarMostrarHTML(String contenido){
+            String incio = "<html lang=\"es\">\n" +
+                    "<head>\n" +
+                    "    <meta charset=\"UTF-8\">\n" +
+                    "    <style type=\"text/css\">\n" +
+                    "        .tecno_input {\n" +
+                    "            width: 90%;\n" +
+                    "            padding: 12px 20px;\n" +
+                    "            margin: 10px 0px 20px;\n" +
+                    "            border: 1px solid #ccc;\n" +
+                    "            border-radius: 4px;\n" +
+                    "            webkit-box-sizing: border-box;\n" +
+                    "            -moz-box-sizing: border-box;\n" +
+                    "            box-sizing: border-box;\n" +
+                    "            background-color: #ffffff;\n" +
+                    "        }\n" +
+                    "\n" +
+                    "        .tecno_recuadro {\n" +
+                    "            border-radius: 5px;\n" +
+                    "            background-color: #f2f2f2;\n" +
+                    "            padding: 20px;\n" +
+                    "        }\n" +
+                    "    </style>\n" +
+                    "</head>\n" +
+                    "<body>";
+            String fin = "</body>\n" +
+                    "</html>";
+            String html = incio + contenido + fin;
+            return html;
+    }
+
 }

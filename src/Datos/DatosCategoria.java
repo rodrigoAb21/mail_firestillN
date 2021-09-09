@@ -53,7 +53,7 @@ public class DatosCategoria extends Tabla{
     
     @Override
     String getNombreTabla() {
-        return " clasificacion ";
+        return " categoria ";
     }
     
     @Override

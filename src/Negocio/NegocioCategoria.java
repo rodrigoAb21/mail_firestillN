@@ -55,21 +55,12 @@ public class NegocioCategoria {
     public String obtenerCategoriaHTML(int id){
         DatosCategoria datosCategoria= new DatosCategoria();
         datosCategoria = datosCategoria.obtener(id);
-        String html="";
-        html="<table class=\"tablaTecno\">\n" +
-             "  <thead>\n" +
-             "    <tr class=\"trCamposTecno\">\n" +
-             "      <th >ID</th>\n"+
-             "      <th class=\"thcolxTecno\">Nombre</th>\n" +
-             "    </tr>\n" +
-             "  </thead>\n" +
-             "  <tbody>\n" +    
-             "    <tr class=\"trDatosTecno\">\n" +
-             "      <td class=\"tdcol1Tecno\">"+datosCategoria.getId()+"</td>\n" +
-             "      <td >"+datosCategoria.getNombre()+"</td>\n" +
-             "    </tr>\n" +
-             "  </tbody>\n" +
-             "</table>";
+        String html = "<h2>Ver Categoria: "+datosCategoria.getId()+"</h2>\n" +
+                "<div class=\"tecno_recuadro\">\n" +
+                "    <label><b>Nombre</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosCategoria.getNombre()+"</p>\n" +
+                "</div>\n";
+
         
         return html;
         
