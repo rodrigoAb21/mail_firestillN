@@ -80,17 +80,60 @@ public class NegocioCliente {
     }
     
     public String obtenerClientesHTML(){
-        DatosCliente datosCliente= new DatosCliente();
-        ArrayList<DatosCliente> lista = datosCliente.obtener();
+        DatosCliente datosCliente = new DatosCliente();
+        ArrayList<DatosCliente> lista= obtenerClientes();
         String html="";
         
         String contenido="";
         for (DatosCliente cliente : lista) {
-        //faltaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            Integer id = cliente.getId();
+            String nombre_empresa=cliente.getNombre_empresa();
+            String nit=cliente.getNit();
+            String telefono_empresa=cliente.getTelefono_empresa();
+            String email=cliente.getEmail();
+            String direccion=cliente.getDireccion();
+            String nombre_encargado=cliente.getNombre_encargado();
+            String cargo_encargado=cliente.getCargo_encargado();
+            String email_encargado= cliente.getEmail_encargado();
+            String telefono_encargado= cliente.getTelefono_encargado();
+            
+            contenido+="<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
+                       "<td >"+nombre_empresa+"</td>\n" +
+                       "<td >"+nit+"</td>\n" +       
+                       "<td >"+telefono_empresa+"</td>\n" + 
+                       "<td >"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarCliente:"+id+"\">Mostrar </a>\n" +
+                             "</li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= editarCliente:"+id+", "+nombre_empresa+", "+nit+", "+telefono_empresa+", "+email+", "+direccion+", "+nombre_encargado+","+cargo_encargado+", "+email_encargado+", "+telefono_encargado+"\">Editar </a>\n" +
+                             "</li>"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= eliminarCliente:"+id+"\">Eliminar </a>\n" +
+                             "</li>"+
+                       "</td>\n" +
+                       "</tr>\n";
         }
         
-        return html;
+        html="<h2>Trabajadores</h2>"+
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarCliente: NOMBRE_EMPRESA, NIT, TELEFONO_EMPRESA, EMAIL, DIRECCION, NOMBRE_ENCARGADO, CARGO_ENCARGADO, EMAIL_ENCARGADO, TELEFONO_ENCARGADO\">Registrar Cliente</a><br>" + 
+            "<table class=\"tablaTecno\">\n" +
+            "  <thead>\n" +
+            "    <tr class=\"trCamposTecno\">\n" +
+            "      <th >ID</th>\n"+
+            "      <th class=\"thcolxTecno\">Nombre</th>\n" +
+            "      <th class=\"thcolxTecno\">CI/Nit</th>\n" +
+            "      <th class=\"thcolxTecno\">Telefono</th>\n" + 
+            "      <th class=\"thcolxTecno\">Opciones</th>\n" +                
+            "    </tr>\n" +
+            "  </thead>\n" +
+            "  <tbody>\n" +    
+                contenido+
+            "  </tbody>\n" +
+            "</table>";
         
+        
+        return html;
     }
     
     
