@@ -87,11 +87,13 @@ public class DatosIngresoProducto extends Tabla{
         String sql = "INSERT INTO "+getNombreTabla()+" ("
                 + "fecha,"
                 + "nro_factura,"
+                + "proveedor,"
                 + "total"
                 + ")"
                 + "VALUES("
                 +getSQLString(this.fecha)+","
                 +getSQLString(this.nro_factura)+","
+                +getSQLString(this.proveedor_id)+","
                 +getSQLString(this.total)+" "
                 +") RETURNING ID;";
         return sql;
@@ -120,6 +122,7 @@ public class DatosIngresoProducto extends Tabla{
             while(resultado.next()){
                 DatosIngresoProducto datosIngresoProducto = new DatosIngresoProducto();
                 datosIngresoProducto.id=resultado.getInt("id");
+                datosIngresoProducto.proveedor_id=resultado.getInt("proveedor_id");
                 datosIngresoProducto.fecha=resultado.getDate("fecha");
                 datosIngresoProducto.nro_factura=resultado.getString("nro_factura");
                 datosIngresoProducto.total=resultado.getFloat("total");

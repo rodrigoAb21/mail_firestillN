@@ -81,4 +81,46 @@ public class NegocioDetalleIngresoProducto{
     public String obtenerDetallesIngresoProductosHTML(){
         return "";
     }
+
+    public String obtenerDetallesIngresoProductosHTMLporIngreso(Integer id_ingreso){
+
+        DatosDetalleIngresoProducto datosDetalleIngresoProducto = new DatosDetalleIngresoProducto();
+        ArrayList<DatosDetalleIngresoProducto> lista= obtenerDetallesIngresoProductos();
+        String html="";
+
+        String contenido="";
+
+        for (DatosDetalleIngresoProducto detalle : lista) {
+            if (detalle.getIngreso_producto_id() == id_ingreso){
+                Integer id= detalle.getId();
+                Float costo = detalle.getCosto();
+                Integer cantidad = detalle.getCantidad();
+
+                DatosProducto datosProducto = new DatosProducto().obtener(detalle.getProducto_id());
+
+                contenido+="<tr class=\"trDatosTecno\">\n" +
+                        "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
+                        "<td >"+datosProducto.getNombre()+"</td>\n" +
+                        "<td >"+cantidad+"</td>\n" +
+                        "<td >"+costo+"</td>\n" +
+                        "</tr>\n";
+            }
+        }
+
+        html="<h2>Detalle</h2>"+
+                "<table class=\"tablaTecno\">\n" +
+                "  <thead>\n" +
+                "    <tr class=\"trCamposTecno\">\n" +
+                "      <th >ID</th>\n"+
+                "      <th class=\"thcolxTecno\">Producto</th>\n" +
+                "      <th class=\"thcolxTecno\">Cantidad</th>\n" +
+                "      <th class=\"thcolxTecno\">Costo U.</th>\n" +
+                "    </tr>\n" +
+                "  </thead>\n" +
+                "  <tbody>\n" +
+                contenido+
+                "  </tbody>\n" +
+                "</table>";
+        return html;
+    }
 }

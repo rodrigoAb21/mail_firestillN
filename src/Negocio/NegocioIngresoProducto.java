@@ -7,6 +7,7 @@ package Negocio;
 
 import Datos.DatosDetalleIngresoProducto;
 import Datos.DatosIngresoProducto;
+import Datos.DatosProveedor;
 import Datos.DatosTipoClasificacion;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -69,11 +70,70 @@ public class NegocioIngresoProducto {
     }
     
     public String obtenerIngresoProductoHTML(int id){
-        return "";
+        DatosIngresoProducto datosIngresoProducto = obtenerIngresoProducto(id);
+        DatosProveedor datosProveedor = new DatosProveedor().obtener(datosIngresoProducto.getProveedor_id());
+
+        String html = "<h2>Ver Ingreso de Producto: "+datosIngresoProducto.getId()+"</h2>\n" +
+                "<div class=\"tecno_recuadro\">\n" +
+                "    <label><b>Fecha</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosIngresoProducto.getFecha()+"</p>\n" +
+                "    <label><b>Nro Factura</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosIngresoProducto.getNro_factura()+"</p>\n" +
+                "    <label><b>Proveedor</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProveedor.getNombre()+"</p>\n" +
+                "    <label><b>Total Bs</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosIngresoProducto.getTotal()+"</p>\n" +
+                "</div>\n";
+
+        String html2 = new NegocioDetalleIngresoProducto().obtenerDetallesIngresoProductosHTMLporIngreso(id);
+
+        return html + "\n<br>\n" +html2;
     }
     
     public String obtenerIngresosProductosHTML(){
-        return "";
+        ArrayList<DatosIngresoProducto> lista = obtenerIngresosProductos();
+        String html = "";
+        String contenido="";
+        for (DatosIngresoProducto ingresoProducto : lista){
+            Integer id = ingresoProducto.getId();
+            Date fecha = ingresoProducto.getFecha();
+            String nro_factura = ingresoProducto.getNro_factura();
+            Float total = ingresoProducto.getTotal();
+            Integer proveedor_id = ingresoProducto.getProveedor_id();
+
+            DatosProveedor datosProveedor = new DatosProveedor().obtener(proveedor_id);
+
+            contenido+="<tr class=\"trDatosTecno\">\n" +
+                    "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
+                    "<td >"+fecha+"</td>\n" +
+                    "<td >"+nro_factura+"</td>\n" +
+                    "<td >"+datosProveedor.getNombre()+"</td>\n" +
+                    "<td >"+total+"</td>\n" +
+                    "<td >"+
+                    "<li>"+
+                    "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= eliminaringresoproducto:"+ingresoProducto.getId()+"\">Eliminar </a>\n" +
+                    "</li>"+
+                    "</td>\n" +
+                    "</tr>\n";
+
+        }
+        html="<table class=\"tablaTecno\">\n" +
+                "  <thead>\n" +
+                "    <tr class=\"trCamposTecno\">\n" +
+                "      <th >ID</th>\n"+
+                "      <th class=\"thcolxTecno\">Fecha</th>\n" +
+                "      <th class=\"thcolxTecno\">Nro Factura</th>\n" +
+                "      <th class=\"thcolxTecno\">Proveedor</th>\n" +
+                "      <th class=\"thcolxTecno\">Total Bs</th>\n" +
+                "      <th class=\"thcolxTecno\">Opciones</th>\n" +
+                "    </tr>\n" +
+                "  </thead>\n" +
+                "  <tbody>\n" +
+                contenido+
+                "  </tbody>\n" +
+                "</table>";
+
+        return html;
     }
     
 }
