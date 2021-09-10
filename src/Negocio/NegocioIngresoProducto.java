@@ -117,7 +117,8 @@ public class NegocioIngresoProducto {
                     "</tr>\n";
 
         }
-        html="<table class=\"tablaTecno\">\n" +
+        html="<h2>Ingresos de Productos</h2>" +
+                "<table class=\"tablaTecno\">\n" +
                 "  <thead>\n" +
                 "    <tr class=\"trCamposTecno\">\n" +
                 "      <th >ID</th>\n"+

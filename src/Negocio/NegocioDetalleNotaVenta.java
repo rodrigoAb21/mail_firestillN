@@ -9,6 +9,8 @@ import Datos.DatosDetalleNotaVenta;
 import Datos.DatosNotaVenta;
 import Datos.DatosProducto;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author asus
@@ -57,12 +59,58 @@ public class NegocioDetalleNotaVenta {
         
         detalle.eliminar();
     }
-    
-    public static void main(String[] args) {
-        NegocioDetalleNotaVenta n= new NegocioDetalleNotaVenta();
-        n.registrar(4,1,2);
+
+    public DatosDetalleNotaVenta obtenerDetalleNotaVenta(int id){
+        DatosDetalleNotaVenta datosDetalleNotaVenta = new DatosDetalleNotaVenta();
+        datosDetalleNotaVenta= datosDetalleNotaVenta.obtener(id);
+        return datosDetalleNotaVenta;
     }
-    
-    
-   
+
+    public ArrayList<DatosDetalleNotaVenta> obtenerDetallesNotaVenta(){
+        DatosDetalleNotaVenta datosDetalleNotaVenta = new DatosDetalleNotaVenta();
+        ArrayList<DatosDetalleNotaVenta> lista = datosDetalleNotaVenta.obtener();
+        return lista;
+    }
+
+
+    public String obtenerDetallesIngresoProductosHTMLporNotaVenta(Integer venta_id) {
+        DatosDetalleNotaVenta datosDetalleNotaVenta = new DatosDetalleNotaVenta();
+        ArrayList<DatosDetalleNotaVenta> lista= obtenerDetallesNotaVenta();
+        String html="";
+
+        String contenido="";
+
+        for (DatosDetalleNotaVenta detalle : lista) {
+            if (detalle.getNota_venta_id() == venta_id){
+                Integer id= detalle.getId();
+                Float precio = detalle.getPrecio();
+                Integer cantidad = detalle.getCantidad();
+
+                DatosProducto datosProducto = new DatosProducto().obtener(detalle.getProducto_id());
+
+                contenido+="<tr class=\"trDatosTecno\">\n" +
+                        "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
+                        "<td >"+datosProducto.getNombre()+"</td>\n" +
+                        "<td >"+cantidad+"</td>\n" +
+                        "<td >"+precio+"</td>\n" +
+                        "</tr>\n";
+            }
+        }
+
+        html="<h2>Detalle</h2>"+
+                "<table class=\"tablaTecno\">\n" +
+                "  <thead>\n" +
+                "    <tr class=\"trCamposTecno\">\n" +
+                "      <th >ID</th>\n"+
+                "      <th class=\"thcolxTecno\">Producto</th>\n" +
+                "      <th class=\"thcolxTecno\">Cantidad</th>\n" +
+                "      <th class=\"thcolxTecno\">Precio U.</th>\n" +
+                "    </tr>\n" +
+                "  </thead>\n" +
+                "  <tbody>\n" +
+                contenido+
+                "  </tbody>\n" +
+                "</table>";
+        return html;
+    }
 }
