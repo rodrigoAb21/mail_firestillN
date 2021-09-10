@@ -19,7 +19,7 @@ public class NegocioDetalleIngresoProducto{
         
     }
     
-    public Integer registrar(Integer producto_id, Integer ingreso_producto_id, Integer cantidad, Float costo){
+    public Integer registrar(Integer ingreso_producto_id,Integer producto_id, Integer cantidad, Float costo){
         DatosDetalleIngresoProducto datosDetalleIngresoProducto = new DatosDetalleIngresoProducto();
         datosDetalleIngresoProducto.setProducto_id(producto_id);
         datosDetalleIngresoProducto.setIngreso_producto_id(ingreso_producto_id);
@@ -33,6 +33,11 @@ public class NegocioDetalleIngresoProducto{
         int cantidad_total=datosProducto.getCantidad()+ cantidad;
         datosProducto.setCantidad(cantidad_total);
         datosProducto.editar();
+        
+        DatosIngresoProducto ingresoProducto= new DatosIngresoProducto();
+        ingresoProducto= ingresoProducto.obtener(ingreso_producto_id);
+        float total_resultante= ingresoProducto.getTotal()+cantidad*costo;
+        ingresoProducto.editar();
         
         return id;
     }

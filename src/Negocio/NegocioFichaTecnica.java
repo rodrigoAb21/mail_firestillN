@@ -166,6 +166,78 @@ public class NegocioFichaTecnica {
         return html;
     }
     
+    public String obtenerListaPartesHTML(){
+        String html="<h2>Partes de extintor</h2>"+
+            "<table class=\"tablaTecno\">\n" +
+            "  <thead>\n" +
+            "    <tr class=\"trCamposTecno\">\n" +
+            "      <th >ID</th>\n"+
+            "      <th class=\"thcolxTecno\">Nombre</th>\n" +                
+            "    </tr>\n" +
+            "  </thead>\n" +
+            "  <tbody>\n" +    
+                "<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">1</td>\n" +
+                       "<td class=\"tdcol1Tecno\">CañoPesca</td>\n" +
+                "</tr>\n"+
+                "<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">2</td>\n" +
+                       "<td class=\"tdcol1Tecno\">Zuncho</td>\n" +
+                "</tr>\n"+
+                "<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">3</td>\n" +
+                       "<td class=\"tdcol1Tecno\">Chasis</td>\n" +
+                "</tr>\n"+
+                "<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">4</td>\n" +
+                       "<td class=\"tdcol1Tecno\">Rueda</td>\n" +
+                "</tr>\n"+
+                "<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">5</td>\n" +
+                       "<td class=\"tdcol1Tecno\">Rosca</td>\n" +
+                "</tr>\n"+
+                "<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">6</td>\n" +
+                       "<td class=\"tdcol1Tecno\">Manguera</td>\n" +
+                "</tr>\n"+
+                "<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">7</td>\n" +
+                       "<td class=\"tdcol1Tecno\">Valvula</td>\n" +
+                "</tr>\n"+
+                "<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">8</td>\n" +
+                       "<td class=\"tdcol1Tecno\">Tobera</td>\n" +
+                "</tr>\n"+
+                "<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">9</td>\n" +
+                       "<td class=\"tdcol1Tecno\">Robinete</td>\n" +
+                "</tr>\n"+
+                "<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">10</td>\n" +
+                       "<td class=\"tdcol1Tecno\">Palanca</td>\n" +
+                "</tr>\n"+
+                "<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">11</td>\n" +
+                       "<td class=\"tdcol1Tecno\">Manometro</td>\n" +
+                "</tr>\n"+
+                "<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">12</td>\n" +
+                       "<td class=\"tdcol1Tecno\">Vastago</td>\n" +
+                "</tr>\n"+
+                "<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">13</td>\n" +
+                       "<td class=\"tdcol1Tecno\">Difusor</td>\n" +
+                "</tr>\n"+
+                "<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">14</td>\n" +
+                       "<td class=\"tdcol1Tecno\">Disco</td>\n" +
+                "</tr>\n"+
+            "  </tbody>\n" +
+            "</table>";
+        
+        
+        return html;
+    }
     
     public static void main(String[] args) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");

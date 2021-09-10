@@ -8,7 +8,10 @@ package Negocio;
 import Datos.DatosDetalleIngresoProducto;
 import Datos.DatosIngresoProducto;
 import Datos.DatosTipoClasificacion;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -20,9 +23,16 @@ public class NegocioIngresoProducto {
         
     }
     
-    public Integer registrar(String nro_factura,Float total){
+    public Integer registrar(Integer proveedor_id, String nro_factura){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        String fecha = dtf.format(LocalDateTime.now());
+        Date fecha_hoy=new Date(fecha);
+        
         DatosIngresoProducto datosIngresoProducto = new DatosIngresoProducto();
+        datosIngresoProducto.setFecha(fecha_hoy);
+        datosIngresoProducto.setProveedor_id(proveedor_id);
         datosIngresoProducto.setNro_factura(nro_factura);
+        float total=0;
         datosIngresoProducto.setTotal(total);
         return datosIngresoProducto.insertar();
     }

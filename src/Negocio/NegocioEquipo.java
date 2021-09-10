@@ -144,4 +144,12 @@ public class NegocioEquipo {
         return html;
     }
     
+    
+    public static void main(String[] args) {
+        NegocioEquipo ne= new NegocioEquipo();
+        ne.obtenerEquipos();
+        for (DatosEquipo equipo : ne.obtenerEquipos()) {
+            System.out.println("equipo: "+ equipo.getId());
+        }
+    }
 }

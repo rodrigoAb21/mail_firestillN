@@ -15,6 +15,7 @@ import Negocio.NegocioCategoria;
 import Negocio.NegocioCliente;
 import Negocio.NegocioConfig;
 import Negocio.NegocioContrato;
+import Negocio.NegocioDetalleIngresoProducto;
 import Negocio.NegocioDetalleNotaVenta;
 import Negocio.NegocioEquipo;
 import Negocio.NegocioFichaTecnica;
@@ -305,6 +306,9 @@ public class ComandoFirestill {
                     listarFichasTecnicas();
                     break;
                     
+                    case "listarPartes":
+                    listarPartes();    
+                    
                     //Ingreso producto
                     case "registraringresoproducto":
                     registrarIngresoProducto(s[1]);
@@ -324,10 +328,16 @@ public class ComandoFirestill {
                     
                     //Detalle ingreso productos
                     
+                    
                     //Nota venta
                     case "registrarnotaventa":
                     registrarNotaVenta(s[1]);
                     break;
+                    
+                    case "anularnotaventa":
+                    anularNotaVenta(s[1]);    
+                    
+                    
                     //Detalle nota venta
                     
                     //Servicio
@@ -1362,12 +1372,69 @@ public class ComandoFirestill {
         }
     }
 
-    
+    private void listarPartes(){
+        try {
+            NegocioFichaTecnica negocioFichaTecnica= new NegocioFichaTecnica();
+            String html=negocioFichaTecnica.obtenerListaPartesHTML();
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+    }
     // 13 Ingreso Producto
     
     private void registrarIngresoProducto(String data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+         String[] values = data.split(",");
+        try {
+            Integer proveedor_id = getInteger_NOT_NULL(values[0]);
+            String nro_factura = getString_NOT_NULL(values[1]);
+            if(values.length<5){
+                throw new Exception();
+            }
+            int contador=1;
+            while(contador<values.length-1){
+                int producto_id=getInteger_NOT_NULL(values[contador+1]);
+                NegocioProducto n_producto=new NegocioProducto();
+                DatosProducto producto=n_producto.obtenerProducto(producto_id);
+                int cantidad=getInteger_NOT_NULL(values[contador+2]);
+                if(cantidad<=0){
+                    System.out.println("entro al primer throw");
+                    throw new Exception();
+                }
+                Float costo= getFloat_NOT_NULL(values[contador+3]);
+                if(costo<0){
+                    System.out.println("entro al primer throw");
+                    throw new Exception();
+                }
+                contador=contador+3;
+            }
+            System.out.println("salio");
+            NegocioIngresoProducto negocioIngresoProducto= new NegocioIngresoProducto();
+            Integer id = negocioIngresoProducto.registrar(proveedor_id,nro_factura);
+            System.out.println("entro luego de registrar");
+            
+            int contador2=1;
+            while (contador2<values.length-1) {
+                NegocioDetalleIngresoProducto detalle= new NegocioDetalleIngresoProducto();
+                int producto_id2=getInteger_NOT_NULL(values[contador2+1]);
+                int cantidad2=getInteger_NOT_NULL(values[contador2+2]);
+                float costo2=getFloat_NOT_NULL(values[contador2+3]);
+                detalle.registrar(id,producto_id2, cantidad2,  costo2);
+                contador2=contador2+3;
+            }
+            
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","La ficha de inspeccion fue registrada exitosamente.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+     }   
 
     private void eliminarIngresoProducto(String data) {
         String[] values = data.split(",");
@@ -1458,6 +1525,20 @@ public class ComandoFirestill {
         }
      }   
     
+    public void anularNotaVenta(String data){
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioNotaVenta negocioNotaVenta= new NegocioNotaVenta();
+            negocioNotaVenta.eliminar(id);
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","La nota de venta fue anulada.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+    }
     
     
     
@@ -1589,7 +1670,7 @@ public class ComandoFirestill {
 //        c.ejecutarComando("nath.1475369@gmail.com", "eliminarMarcaClasificacion:");
 //        c.ejecutarComando("nath.1475369@gmail.com", "mostrarMarcaClasificacion:2");
             //cliente_id, producto_id, cantidad,...
-          c.ejecutarComando("nath.1475369@gmail.com", "registrarNotaVenta:1,2,10,3,12");
+          c.ejecutarComando("nath.1475369@gmail.com", "registrarNotaVenta:1,2,1000000");
     }
     
 }

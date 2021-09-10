@@ -5,9 +5,11 @@
  */
 package Negocio;
 
+import Datos.DatosDetalleNotaVenta;
 import Datos.DatosNotaVenta;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -30,6 +32,27 @@ public class NegocioNotaVenta {
         float total=0;
         datosNotaVenta.setTotal(total);
         return datosNotaVenta.insertar();
+    }
+    
+    public void eliminar(Integer id)throws Exception{
+        DatosNotaVenta datosNotaVenta= new DatosNotaVenta();
+        datosNotaVenta=datosNotaVenta.obtener(id);
+        if(datosNotaVenta.getDeleted_at().contentEquals("null")){
+            
+            
+            DatosDetalleNotaVenta detalle= new DatosDetalleNotaVenta();
+            ArrayList<DatosDetalleNotaVenta> lista= detalle.obtener();
+            for (DatosDetalleNotaVenta detalleNotaVenta : lista) {
+                if(detalleNotaVenta.getNota_venta_id()==id){
+                    NegocioDetalleNotaVenta n= new NegocioDetalleNotaVenta();
+                    n.eliminar(detalleNotaVenta.getId());
+                }
+            }
+            
+            datosNotaVenta.eliminar();
+        }else{
+            throw new Exception("ya fue eliminado");
+        }
     }
     
     public static void main(String[] args) {

@@ -7,6 +7,8 @@ package Negocio;
 
 import Datos.DatosBajaProducto;
 import Datos.DatosProducto;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -21,8 +23,12 @@ public class NegocioBajaProducto {
     }
    
     public Integer registrar(Integer producto_id,Integer cantidad, String motivo){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        String fecha = dtf.format(LocalDateTime.now());
+        Date fecha_hoy=new Date(fecha);
+        
         DatosBajaProducto datosBajaProducto = new DatosBajaProducto();
-        //falta ponser la fechaaaaa
+        datosBajaProducto.setFecha(fecha_hoy);
         datosBajaProducto.setProducto_id(producto_id);
         datosBajaProducto.setCantidad(cantidad);
         datosBajaProducto.setMotivo(motivo);

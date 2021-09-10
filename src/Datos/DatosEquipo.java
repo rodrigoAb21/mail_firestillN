@@ -198,7 +198,7 @@ public class DatosEquipo extends Tabla{
                 equipo.sucursal_id=resultado.getInt("sucursal_id");
                 equipo.tipo_clasificacion_id=resultado.getInt("tipo_clasificacion_id");
                 equipo.marca_clasificacion_id=resultado.getInt("marca_clasificacion_id");
-                equipo.deleted_at= resultado.getNString("deleted_at");
+                equipo.deleted_at= resultado.getString("deleted_at");
                 lista.add(equipo);
                         }
         } catch (SQLException ex) {

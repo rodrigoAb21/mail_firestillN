@@ -125,6 +125,7 @@ public class NegocioCliente {
                              "<li>"+
                              "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarCliente:"+id+"\">Mostrar </a>\n" +
                              "</li>"+
+                             "<li>"+
                              "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= editarCliente:"+id+", "+nombre_empresa+", "+nit+", "+telefono_empresa+", "+email+", "+direccion+", "+nombre_encargado+","+cargo_encargado+", "+email_encargado+", "+telefono_encargado+"\">Editar </a>\n" +
                              "</li>"+
                              "<li>"+

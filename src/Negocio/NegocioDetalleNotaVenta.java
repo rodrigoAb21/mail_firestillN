@@ -29,19 +29,33 @@ public class NegocioDetalleNotaVenta {
         datosDetalleNotaVenta.setPrecio(datosProducto.getPrecio());
         
         Integer id= datosDetalleNotaVenta.insertar();
+        
         int cantidad_resultante= datosProducto.getCantidad()-cantidad;
         datosDetalleNotaVenta.setCantidad(cantidad_resultante);
         
         DatosNotaVenta nota_venta=new DatosNotaVenta();
         nota_venta= nota_venta.obtener(nota_venta_id);
-        
-        System.out.println("nota venta total: "+nota_venta.getTotal());
-        System.out.println("precio producto: "+datosProducto.getPrecio());
-        float total_resultante=nota_venta.getTotal()+datosProducto.getPrecio();
+        System.out.println("nota venta: "+nota_venta.getId()+" " );
+        System.out.println("nota venta total: "+nota_venta.getTotal().toString());
+        System.out.println("precio producto: "+datosProducto.getPrecio().toString());
+        float total_resultante=nota_venta.getTotal()+(datosProducto.getPrecio()*cantidad);
         nota_venta.setTotal(total_resultante);
+        System.out.println("total resultante: "+total_resultante);
         nota_venta.editar();
         
         return id;
+    }
+    
+    public void eliminar(Integer id){
+        DatosDetalleNotaVenta detalle= new DatosDetalleNotaVenta();
+        detalle = detalle.obtener(id);
+        
+        DatosProducto producto= new DatosProducto();
+        int cantidad_resultante=producto.getCantidad()+detalle.getCantidad();
+        producto.setCantidad(cantidad_resultante);
+        producto.editar();
+        
+        detalle.eliminar();
     }
     
     public static void main(String[] args) {

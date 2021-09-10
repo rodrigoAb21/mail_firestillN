@@ -113,7 +113,10 @@ public class DatosNotaVenta extends Tabla{
 
     @Override
     String getSqlUpdate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "UPDATE "+getNombreTabla()+" SET "
+                + "total="+getSQLString(this.total)
+                + "where id="+ getSQLString(this.id)+";";
+        return sql;
     }
 
     @Override
@@ -135,7 +138,7 @@ public class DatosNotaVenta extends Tabla{
                 DatosNotaVenta datosNotaVenta = new DatosNotaVenta();
                 datosNotaVenta.id=resultado.getInt("id");
                 datosNotaVenta.cliente_id=resultado.getInt("cliente_id");
-                datosNotaVenta.trabajador_id=resultado.getInt("trabajado_id");
+                datosNotaVenta.trabajador_id=resultado.getInt("trabajador_id");
                 datosNotaVenta.fecha=resultado.getDate("fecha");
                 datosNotaVenta.total=resultado.getFloat("total");
                 datosNotaVenta.deleted_at=resultado.getString("deleted_at");
