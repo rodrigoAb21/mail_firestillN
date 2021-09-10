@@ -6,6 +6,8 @@
 package Negocio;
 
 import Datos.DatosFichaTecnica;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -25,6 +27,11 @@ public class NegocioFichaTecnica {
         datosFichaTecnica.setCarga(carga);
         datosFichaTecnica.setObservacion(observacion);
         datosFichaTecnica.setResultado(resultado);
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        String fecha = dtf.format(LocalDateTime.now());
+        Date fecha_hoy=new Date(fecha);
+        datosFichaTecnica.setFecha(fecha_hoy);
         return datosFichaTecnica.insertar();
     }
     
@@ -159,4 +166,11 @@ public class NegocioFichaTecnica {
         return html;
     }
     
+    
+    public static void main(String[] args) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        String fecha = dtf.format(LocalDateTime.now());
+        Date fecha_hoy=new Date(fecha);
+        System.out.println(fecha_hoy);
+    }
 }

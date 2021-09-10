@@ -7,6 +7,7 @@ package Utils;
 
 import Comunicacion.ClienteSMTP;
 import Datos.DatosCliente;
+import Datos.DatosProducto;
 import Datos.DatosTrabajador;
 import Datos.Prueba;
 import Negocio.NegocioBajaProducto;
@@ -14,10 +15,12 @@ import Negocio.NegocioCategoria;
 import Negocio.NegocioCliente;
 import Negocio.NegocioConfig;
 import Negocio.NegocioContrato;
+import Negocio.NegocioDetalleNotaVenta;
 import Negocio.NegocioEquipo;
 import Negocio.NegocioFichaTecnica;
 import Negocio.NegocioIngresoProducto;
 import Negocio.NegocioMarcaClasificacion;
+import Negocio.NegocioNotaVenta;
 import Negocio.NegocioProducto;
 import Negocio.NegocioProveedor;
 import Negocio.NegocioSucursal;
@@ -194,7 +197,7 @@ public class ComandoFirestill {
                     eliminarProducto(s[1]);
                     break;
                     
-                    case "mostrarProducto":
+                    case "mostrarproducto":
                     mostrarProducto(s[1]);
                     break;
                     
@@ -322,7 +325,9 @@ public class ComandoFirestill {
                     //Detalle ingreso productos
                     
                     //Nota venta
-                    
+                    case "registrarnotaventa":
+                    registrarNotaVenta(s[1]);
+                    break;
                     //Detalle nota venta
                     
                     //Servicio
@@ -670,7 +675,7 @@ public class ComandoFirestill {
             String nit = getString(values[1]);
             String email = getString(values[2]);
             String direccion = getString_NOT_NULL(values[3]);
-            String telefono = getString_NOT_NULL(values[4]);
+            String telefono = getNroTelefono_NOT_NULL(values[4]);
             String informacion = getString(values[5]);
             String titular = getString(values[6]);
             String banco = getString(values[7]);
@@ -698,7 +703,7 @@ public class ComandoFirestill {
             String nit = getString(values[2]);
             String email = getString(values[3]);
             String direccion = getString_NOT_NULL(values[4]);
-            String telefono = getString_NOT_NULL(values[5]);
+            String telefono = getNroTelefono_NOT_NULL(values[5]);
             String informacion = getString(values[6]);
             String titular = getString(values[7]);
             String banco = getString(values[8]);
@@ -770,13 +775,13 @@ public class ComandoFirestill {
         try {
             String nombre_empresa = getString_NOT_NULL(values[0]);
             String nit = getString(values[1]);
-            String telefono_empresa = getString(values[2]);
+            String telefono_empresa = getNroTelefono(values[2]);
             String email = getString(values[3]);
             String direccion = getString(values[4]);
             String nombre_encargado = getString(values[5]);
             String cargo_encargado = getString(values[6]);
             String email_encargado = getString(values[7]);
-            String telefono_encargado = getString(values[8]);
+            String telefono_encargado = getNroTelefono(values[8]);
             NegocioCliente negocioCliente= new NegocioCliente();
             Integer id = negocioCliente.registrar(nombre_empresa, nit, telefono_empresa,email,direccion,nombre_encargado,cargo_encargado,email_encargado,telefono_encargado);
             ClienteSMTP mensajero= new ClienteSMTP();
@@ -794,13 +799,13 @@ public class ComandoFirestill {
             Integer id= getInteger_NOT_NULL(values[0]);
             String nombre_empresa = getString_NOT_NULL(values[1]);
             String nit = getString(values[2]);
-            String telefono_empresa = getString(values[3]);
+            String telefono_empresa = getNroTelefono(values[3]);
             String email = getString(values[4]);
             String direccion = getString(values[5]);
             String nombre_encargado = getString(values[6]);
             String cargo_encargado = getString(values[7]);
             String email_encargado = getString(values[8]);
-            String telefono_encargado = getString(values[9]);
+            String telefono_encargado = getNroTelefono(values[9]);
             NegocioCliente negocioCliente= new NegocioCliente();
             negocioCliente.editar(id,nombre_empresa, nit, telefono_empresa,email,direccion,nombre_encargado,cargo_encargado,email_encargado,telefono_encargado);
             ClienteSMTP mensajero= new ClienteSMTP();
@@ -1409,9 +1414,49 @@ public class ComandoFirestill {
         }
     }
     
-    
-    
-    
+    // 15 Nota venta
+        
+     private void registrarNotaVenta(String data){
+         String[] values = data.split(",");
+        try {
+            Integer cliente_id = getInteger_NOT_NULL(values[0]);
+            if(values.length<3 || values.length %  2==0){
+                throw new Exception();
+            }
+            int contador=0;
+            while(contador<values.length-1){
+                int producto_id=getInteger_NOT_NULL(values[contador+1]);
+                NegocioProducto n_producto=new NegocioProducto();
+                DatosProducto producto=n_producto.obtenerProducto(producto_id);
+                int cantidad=getInteger_NOT_NULL(values[contador+2]);
+                if(producto.getCantidad()<cantidad){
+                    System.out.println("entro al primer throw");
+                    throw new Exception();
+                }
+                contador=contador+2;
+            }
+            System.out.println("salio");
+            NegocioNotaVenta negocioNotaVenta= new NegocioNotaVenta();
+            Integer id = negocioNotaVenta.registrar(ejecutor.getId(),cliente_id);
+            System.out.println("entro luego de registrar");
+            
+            int contador2=0;
+            while (contador2<values.length-1) {
+                NegocioDetalleNotaVenta detalle= new NegocioDetalleNotaVenta();
+                int producto_id2=getInteger_NOT_NULL(values[contador2+1]);
+                int cantidad2=getInteger_NOT_NULL(values[contador2+2]);
+                detalle.registrar(id, producto_id2, cantidad2);
+                contador2=contador2+2;
+            }
+            
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","La ficha de inspeccion fue registrada exitosamente.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+     }   
     
     
     
@@ -1496,6 +1541,14 @@ public class ComandoFirestill {
         return carnet;
     }
     
+    private String getNroTelefono_NOT_NULL(String texto)throws Exception{
+        String telefono=getNroTelefono(texto);
+        if(telefono==null){
+            throw new Exception();
+        }
+        return telefono;
+    }
+    
     private String getNroTelefono(String texto)throws Exception{
         String valor=null;
         if(!esNulo(texto)){
@@ -1530,12 +1583,13 @@ public class ComandoFirestill {
     
     public static void main(String[] args) {
         ComandoFirestill c= new ComandoFirestill();
-        c.ejecutarComando("nath.1475369@gmail.com", "registrarMarcaClasificacion:nueva marca");
-        c.ejecutarComando("nath.1475369@gmail.com", "editarMarcaClasificacion:1, otra marca");
-        c.ejecutarComando("nath.1475369@gmail.com", "mostrarMarcaClasificacion:2");
-        c.ejecutarComando("nath.1475369@gmail.com", "eliminarMarcaClasificacion:");
-        c.ejecutarComando("nath.1475369@gmail.com", "mostrarMarcaClasificacion:2");
-        c.ejecutarComando("nath.1475369@gmail.com", "mostrarMarcaClasificacion:2");
+//        c.ejecutarComando("nath.1475369@gmail.com", "registrarMarcaClasificacion:nueva marca");
+//        c.ejecutarComando("nath.1475369@gmail.com", "editarMarcaClasificacion:1, otra marca");
+//        c.ejecutarComando("nath.1475369@gmail.com", "mostrarMarcaClasificacion:2");
+//        c.ejecutarComando("nath.1475369@gmail.com", "eliminarMarcaClasificacion:");
+//        c.ejecutarComando("nath.1475369@gmail.com", "mostrarMarcaClasificacion:2");
+            //cliente_id, producto_id, cantidad,...
+          c.ejecutarComando("nath.1475369@gmail.com", "registrarNotaVenta:1,2,10,3,12");
     }
     
 }

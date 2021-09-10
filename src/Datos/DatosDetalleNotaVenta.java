@@ -21,7 +21,7 @@ public class DatosDetalleNotaVenta extends Tabla{
     private Integer nota_venta_id;
     private Integer producto_id;
     private Integer cantidad;
-    private Float precio_unitario;
+    private Float precio;
     private String deleted_at;
     
     public DatosDetalleNotaVenta(){
@@ -58,12 +58,12 @@ public class DatosDetalleNotaVenta extends Tabla{
         this.cantidad = cantidad;
     }
 
-    public Float getPrecio_unitario() {
-        return precio_unitario;
+    public Float getPrecio() {
+        return precio;
     }
 
-    public void setPrecio_unitario(Float precio_unitario) {
-        this.precio_unitario = precio_unitario;
+    public void setPrecio(Float precio) {
+        this.precio = precio;
     }
 
     public String getDeleted_at() {
@@ -88,13 +88,13 @@ public class DatosDetalleNotaVenta extends Tabla{
                 + "nota_venta_id,"
                 + "producto_id,"
                 + "cantidad,"
-                + "precio_unitario_id"
+                + "precio"
                 + ")"
                 + "VALUES("
                 +getSQLString(this.nota_venta_id)+","
                 +getSQLString(this.producto_id)+","
                 +getSQLString(this.cantidad)+","
-                +getSQLString(this.precio_unitario)+" "
+                +getSQLString(this.precio)+" "
                 +") RETURNING ID;";
         return sql;
     }
@@ -125,7 +125,7 @@ public class DatosDetalleNotaVenta extends Tabla{
                 datosDetalleNotaVenta.nota_venta_id=resultado.getInt("nota_venta_id");
                 datosDetalleNotaVenta.producto_id=resultado.getInt("producto_id");
                 datosDetalleNotaVenta.cantidad=resultado.getInt("cantidad");
-                datosDetalleNotaVenta.precio_unitario=resultado.getFloat("precio_unitario");
+                datosDetalleNotaVenta.precio=resultado.getFloat("precio");
                 datosDetalleNotaVenta.deleted_at=resultado.getString("deleted_at");
                 lista.add(datosDetalleNotaVenta);
             }
