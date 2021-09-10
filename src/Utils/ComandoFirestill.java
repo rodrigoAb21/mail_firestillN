@@ -741,7 +741,7 @@ public class ComandoFirestill {
             String html=negocioProveedor.obtenerProveedorHTML(id);
             Templates t= new Templates();
             ClienteSMTP mensajero= new ClienteSMTP();
-            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+            mensajero.enviarMensaje(correo, "",t.generarMostrarHTML(html));
         } catch (Exception e) {
             System.out.println("Error al catch de firestill");
             ClienteSMTP mensajero= new ClienteSMTP();
@@ -835,7 +835,7 @@ public class ComandoFirestill {
             String html=negocioCliente.obtenerClienteHTML(id);
             Templates t= new Templates();
             ClienteSMTP mensajero= new ClienteSMTP();
-            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+            mensajero.enviarMensaje(correo, "",t.generarMostrarHTML(html));
         } catch (Exception e) {
             System.out.println("Error al catch de firestill");
             ClienteSMTP mensajero= new ClienteSMTP();

@@ -71,9 +71,29 @@ public class NegocioCliente {
     public String obtenerClienteHTML(int id){
         DatosCliente datosCliente= new DatosCliente();
         datosCliente = datosCliente.obtener(id);
-        String html="";
-        
-        //faltaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        String html = "<h2>Ver Cliente: "+datosCliente.getId()+"</h2>\n" +
+                "<div class=\"tecno_recuadro\">\n" +
+                "    <label><b>Nombre</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosCliente.getNombre_empresa()+"</p>\n" +
+                "    <label><b>NIT/CI</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosCliente.getNit()+"</p>\n" +
+                "    <label><b>Email</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosCliente.getEmail()+"</p>\n" +
+                "    <label><b>Direccion</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosCliente.getDireccion()+"</p>\n" +
+                "    <label><b>Telefono</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosCliente.getTelefono_empresa()+"</p>\n" +
+
+                "    <h3>Datos del Encargado</h3>\n" +
+                "    <label><b>Nombre</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosCliente.getNombre_encargado()+"</p>\n" +
+                "    <label><b>Email</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosCliente.getEmail_encargado()+"</p>\n" +
+                "    <label><b>Cargo</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosCliente.getCargo_encargado()+"</p>\n" +
+                "    <label><b>Telefono</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosCliente.getTelefono_encargado()+"</p>\n" +
+                "</div>\n";
         
         return html;
         

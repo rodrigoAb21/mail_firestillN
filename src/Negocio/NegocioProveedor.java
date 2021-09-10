@@ -76,9 +76,38 @@ public class NegocioProveedor {
     public String obtenerProveedorHTML(int id){
         DatosProveedor datosProveedor= new DatosProveedor();
         datosProveedor = datosProveedor.obtener(id);
-        String html="";
-        html="";
-        //faltaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        String html = "<h2>Ver Proveedor: "+datosProveedor.getId()+"</h2>\n" +
+                "<div class=\"tecno_recuadro\">\n" +
+                "    <label><b>Nombre</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProveedor.getNombre()+"</p>\n" +
+                "    <label><b>NIT</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProveedor.getNit()+"</p>\n" +
+                "    <label><b>Email</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProveedor.getEmail()+"</p>\n" +
+                "    <label><b>Direccion</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProveedor.getDireccion()+"</p>\n" +
+                "    <label><b>Telefono</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProveedor.getTelefono()+"</p>\n" +
+                "    <label><b>Informacion</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProveedor.getInformacion()+"</p> <br> \n" +
+
+                "    <h3>Datos Bancarios</h3>\n" +
+                "    <label><b>Titular</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProveedor.getTitular()+"</p>\n" +
+                "    <label><b>Banco</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProveedor.getBanco()+"</p>\n" +
+                "    <label><b>Sucursal</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProveedor.getSucursal()+"</p>\n" +
+                "    <label><b>Nro Cuenta</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProveedor.getNro_cuenta()+"</p>\n" +
+                "    <label><b>Moneda</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProveedor.getMoneda()+"</p>\n" +
+                "    <label><b>Tipo Identificacion</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProveedor.getTipo_identificacion()+"</p>\n" +
+                "    <label><b>Nro Identificaion</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProveedor.getNro_identificacion()+"</p>\n" +
+                "</div>\n";
+
         
         return html;
         
