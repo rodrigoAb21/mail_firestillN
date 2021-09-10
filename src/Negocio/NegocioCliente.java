@@ -69,8 +69,7 @@ public class NegocioCliente {
     }
     
     public String obtenerClienteHTML(int id){
-        DatosCliente datosCliente= new DatosCliente();
-        datosCliente = datosCliente.obtener(id);
+        DatosCliente datosCliente = obtenerCliente(id);
         String html = "<h2>Ver Cliente: "+datosCliente.getId()+"</h2>\n" +
                 "<div class=\"tecno_recuadro\">\n" +
                 "    <label><b>Nombre</b> </label>\n" +

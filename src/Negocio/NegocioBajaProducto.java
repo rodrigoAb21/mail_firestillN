@@ -51,7 +51,7 @@ public class NegocioBajaProducto {
         }
     }
     
-    public DatosBajaProducto obtener(int id){
+    public DatosBajaProducto obtenerBajaProducto(int id){
         DatosBajaProducto datosBajaProducto = new DatosBajaProducto();
         datosBajaProducto= datosBajaProducto.obtener(id);
         return datosBajaProducto;
@@ -64,8 +64,7 @@ public class NegocioBajaProducto {
     }
     
     public String obtenerBajaProductoHTML(int id){
-        DatosBajaProducto datosBajaProducto= new DatosBajaProducto();
-        datosBajaProducto = datosBajaProducto.obtener(id);
+        DatosBajaProducto datosBajaProducto = obtenerBajaProducto(id);
         DatosProducto datosProducto = new DatosProducto();
         datosProducto = datosProducto.obtener(datosBajaProducto.getProducto_id());
         String html = "<h2>Ver Baja: "+datosBajaProducto.getId()+"</h2>\n" +

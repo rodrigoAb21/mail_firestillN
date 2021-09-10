@@ -53,8 +53,7 @@ public class NegocioCategoria {
     }
     
     public String obtenerCategoriaHTML(int id){
-        DatosCategoria datosCategoria= new DatosCategoria();
-        datosCategoria = datosCategoria.obtener(id);
+        DatosCategoria datosCategoria = obtenerCategoria(id);
         String html = "<h2>Ver Categoria: "+datosCategoria.getId()+"</h2>\n" +
                 "<div class=\"tecno_recuadro\">\n" +
                 "    <label><b>Nombre</b> </label>\n" +

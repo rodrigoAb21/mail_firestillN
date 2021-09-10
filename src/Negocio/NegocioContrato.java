@@ -7,6 +7,8 @@ package Negocio;
 
 import Datos.DatosCliente;
 import Datos.DatosContrato;
+import Datos.DatosTrabajador;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -68,8 +70,32 @@ public class NegocioContrato {
     }
     
     public String obtenerContratoHTML(int id){
-        String html="";
-        return html;
+        DatosContrato datosContrato = new DatosContrato();
+        datosContrato = datosContrato.obtener(id);
+
+        DatosTrabajador datosTrabajador = new DatosTrabajador();
+        datosTrabajador = datosTrabajador.obtener(datosContrato.getTrabajador_id());
+
+        DatosCliente datosCliente = new DatosCliente();
+        datosCliente = datosCliente.obtener(datosContrato.getCliente_id());
+
+        String html = "<h2>Ver Contrato: "+datosContrato.getId()+"</h2>\n" +
+                "<div class=\"tecno_recuadro\">\n" +
+                "    <label><b>Cliente</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosCliente.getNombre_empresa()+"</p>\n" +
+                "    <label><b>Representante Firestill</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosTrabajador.getNombre()+ " " + datosTrabajador.getApellido() + "</p>\n" +
+                "    <label><b>Fecha inicio</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosContrato.getFecha_inicio()+"</p>\n" +
+                "    <label><b>Fecha fin</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosContrato.getFecha_fin()+"</p>\n" +
+                "    <label><b>Periodo (Mes)</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosContrato.getPeriodo()+"</p>\n" +
+                "</div>\n";
+
+        String html2 = "";
+        html2 = new NegocioSucursal().obtenerSucursalHTMLporContrato(id);
+        return html + "\n<br>\n" +html2;
     }
     
     public String obtenerContratosHTML(){

@@ -182,22 +182,15 @@ public class Templates {
                             "</head>\n" +
                             "\n" +
                             "<body>\n" +
-                            "	<div >\n" +
-                            "<div >\n" +
-                            "<div >\n" +
                             "<div >\n" ;
             return htmlInicio;
         }
         
         private String getFin(){
-            String htmlFin = 
-"</div>\n" +
-"</div>\n" +
-"</div>\n" +
-"</div>\n" +
-"</body>\n" +
-"\n" +
-"</html>";
+            String htmlFin = "</div>\n" +
+                    "</body>\n" +
+                    "\n" +
+                    "</html>";
             return htmlFin;
         }
         public String respuesta(Object contenido){
@@ -209,27 +202,66 @@ public class Templates {
     public String generarMostrarHTML(String contenido){
             String incio = "<html lang=\"es\">\n" +
                     "<head>\n" +
-                    "    <meta charset=\"UTF-8\">\n" +
-                    "    <style type=\"text/css\">\n" +
-                    "        .tecno_input {\n" +
-                    "            width: 90%;\n" +
-                    "            padding: 12px 20px;\n" +
-                    "            margin: 10px 0px 20px;\n" +
-                    "            border: 1px solid #ccc;\n" +
-                    "            border-radius: 4px;\n" +
-                    "            webkit-box-sizing: border-box;\n" +
-                    "            -moz-box-sizing: border-box;\n" +
-                    "            box-sizing: border-box;\n" +
-                    "            background-color: #ffffff;\n" +
-                    "        }\n" +
+                    "  <style type=\"text/css\">\n" +
+                    "    .tecno_input {\n" +
+                    "      width: 90%;\n" +
+                    "      padding: 12px 20px;\n" +
+                    "      margin: 10px 0px 20px;\n" +
+                    "      border: 1px solid #ccc;\n" +
+                    "      border-radius: 4px;\n" +
+                    "      webkit-box-sizing: border-box;\n" +
+                    "      -moz-box-sizing: border-box;\n" +
+                    "      box-sizing: border-box;\n" +
+                    "      background-color: #ffffff;\n" +
+                    "    }\n" +
                     "\n" +
-                    "        .tecno_recuadro {\n" +
-                    "            border-radius: 5px;\n" +
-                    "            background-color: #f2f2f2;\n" +
-                    "            padding: 20px;\n" +
-                    "        }\n" +
-                    "    </style>\n" +
+                    "    .tecno_recuadro {\n" +
+                    "      border-radius: 5px;\n" +
+                    "      background-color: #f2f2f2;\n" +
+                    "      padding: 20px;\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    table.tablaTecno{\n" +
+                    "      border-spacing:1px;\n" +
+                    "      border-collapse:collapse;\n" +
+                    "      background:#fff;\n" +
+                    "      border-radius:10px;\n" +
+                    "      overflow:hidden;\n" +
+                    "      width:80%;\n" +
+                    "      margin:0 auto;\n" +
+                    "      position:relative;\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    td.tdcol1Tecno{\n" +
+                    "      text-align: center;\n" +
+                    "      width: 60px;\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    th.thcolxTecno{\n" +
+                    "      text-align: left;\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    tr.trCamposTecno{\n" +
+                    "      height:60px;\n" +
+                    "      background:#36304a;\n" +
+                    "      font-family:sans-serif;\n" +
+                    "      font-size: 18px;\n" +
+                    "      color: #fff;\n" +
+                    "      line-height: 1.2;\n" +
+                    "      font-weight: unset;\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    tr.trDatosTecno{\n" +
+                    "      font-size: 15px;\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    tr.trDatosTecno:hover{\n" +
+                    "      color:#555;background-color:#f5f5f5;cursor:pointer;\n" +
+                    "    }\n" +
+                    "\n" +
+                    "  </style>\n" +
                     "</head>\n" +
+                    "\n" +
                     "<body>";
             String fin = "</body>\n" +
                     "</html>";

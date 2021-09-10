@@ -74,8 +74,7 @@ public class NegocioProveedor {
     }
     
     public String obtenerProveedorHTML(int id){
-        DatosProveedor datosProveedor= new DatosProveedor();
-        datosProveedor = datosProveedor.obtener(id);
+        DatosProveedor datosProveedor = obtenerProveedor(id);
         String html = "<h2>Ver Proveedor: "+datosProveedor.getId()+"</h2>\n" +
                 "<div class=\"tecno_recuadro\">\n" +
                 "    <label><b>Nombre</b> </label>\n" +

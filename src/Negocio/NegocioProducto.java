@@ -71,8 +71,7 @@ public class NegocioProducto {
     }
     
     public String obtenerProductoHTML(int id){
-        DatosProducto datosProducto= new DatosProducto();
-        datosProducto = datosProducto.obtener(id);
+        DatosProducto datosProducto = obtenerProducto(id);
         DatosCategoria datosCategoria = new DatosCategoria();
         datosCategoria = datosCategoria.obtener(datosProducto.getCategoria_id());
         String html = "<h2>Ver Producto: "+datosProducto.getId()+"</h2>\n" +

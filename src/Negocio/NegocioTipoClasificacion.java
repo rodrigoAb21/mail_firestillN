@@ -53,8 +53,7 @@ public class NegocioTipoClasificacion {
     }
     
     public String obtenerTipoClasificacionHTML(int id){
-        DatosTipoClasificacion datosTipoClasificacion= new DatosTipoClasificacion();
-        datosTipoClasificacion = datosTipoClasificacion.obtener(id);
+        DatosTipoClasificacion datosTipoClasificacion = obtenerTipoClasificacion(id);
         String html = "<h2>Ver Tipo de clasificacion: "+datosTipoClasificacion.getId()+"</h2>\n" +
                 "<div class=\"tecno_recuadro\">\n" +
                 "    <label><b>Nombre</b> </label>\n" +
