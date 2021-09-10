@@ -53,6 +53,11 @@ public class ComandoFirestill {
             System.out.println(s[0]);
             switch ((s.length == 1 || (s.length == 2 && !s[0].contains("listar") && !s[0].contains("reporte")) ? s[0] : "")) {
                     
+                    //AYUDA
+                    case "ayuda":
+                    ayuda();
+                    break;
+                
                     // Tipo Clasificacion
                     case "registrartipoclasificacion":
                     registrarTipoClasificacion(s[1]);
@@ -63,7 +68,7 @@ public class ComandoFirestill {
                     break;
                     
                     case "eliminarrtipoclasificacion":
-                    editarTipoClasificacion(s[1]);
+                    eliminarTipoClasificacion(s[1]);
                     break;
                     
                     case "mostrartipoclasificacion":
@@ -71,7 +76,7 @@ public class ComandoFirestill {
                     break;
                     
                     case "listartiposclasificacion":
-                        listarTiposClasificacion();
+                    listarTiposClasificacion();
                     break;
                     
                     
@@ -85,7 +90,7 @@ public class ComandoFirestill {
                     break;
                     
                     case "eliminarrmarcaclasificacion":
-                    editarMarcaClasificacion(s[1]);
+                    eliminarMarcaClasificacion(s[1]);
                     break;
                     
                     case "mostrarmarcaclasificacion":
@@ -93,7 +98,7 @@ public class ComandoFirestill {
                     break;
                     
                     case "listarmarcasclasificacion":
-                        listarMarcasClasificacion();
+                    listarMarcasClasificacion();
                     break;
                     
                     
@@ -107,7 +112,7 @@ public class ComandoFirestill {
                     break;
                     
                     case "eliminarcategoria":
-                    editarCategoria(s[1]);
+                    eliminarCategoria(s[1]);
                     break;
                     
                     case "mostrarcategoria":
@@ -127,8 +132,12 @@ public class ComandoFirestill {
                     registrarTrabajador(s[1], "Venta");
                     break;
                     
-                    case "registrartrabajadormantenimiento":
+                    case "registrartrabajadortecnico":
                     registrarTrabajador(s[1], "Tecnico");
+                    break;
+                    
+                    case "editartrabajador":
+                    editarTrabajador(s[1]);
                     break;
                     
                     case "eliminartrabajador":
@@ -232,7 +241,7 @@ public class ComandoFirestill {
                     editarContrato(s[1]);
                     break;
                     
-                    case "finalizarcontrato":
+                    case "finalizaredicioncontrato":
                     finalizarEdicion(s[1]);
                     break;
                     
@@ -337,6 +346,13 @@ public class ComandoFirestill {
                     case "anularnotaventa":
                     anularNotaVenta(s[1]);    
                     
+                    case "mostrarNotaVenta":
+                    mostrarNotaVenta(s[1]);
+                    break;
+                    
+                    case "listarNotaVenta":
+                    listarNotasVenta();
+                    break;
                     
                     //Detalle nota venta
                     
@@ -353,7 +369,12 @@ public class ComandoFirestill {
             System.out.println("Error de Comando");
         }
     }
-
+    
+    public void ayuda(){
+        ClienteSMTP mensajero= new ClienteSMTP();
+        Templates t= new Templates();
+        mensajero.enviarMensaje(correo, "COMANDOS FIRESTILL",t.ayudaHTML());
+    }
     //Tipo Clasificacion
     public void registrarTipoClasificacion(String data){
         String[] values = data.split(",");
@@ -618,7 +639,25 @@ public class ComandoFirestill {
     }
     
     public void editarTrabajador(String data){
-        
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            String nombre = getString_NOT_NULL(values[0]);
+            String apellido = getString_NOT_NULL(values[1]);
+            String carnet = getCarnet_NOT_NULL(values[2]);
+            String telefono = getNroTelefono(values[3]);
+            String direccion = getString(values[4]);
+            String email = getString_NOT_NULL(values[5]);  
+            String contrasenia = getString_NOT_NULL(values[6]);
+            NegocioTrabajador negocioTrabajador= new NegocioTrabajador();
+            negocioTrabajador.editar(id, nombre, apellido, direccion, carnet, telefono, email, contrasenia);
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","El trabajador fue editado exitosamente.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
     
     public void cambiarContrasenia(){
@@ -1540,6 +1579,35 @@ public class ComandoFirestill {
         }
     }
     
+    public void mostrarNotaVenta(String data){
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioNotaVenta negocioNotaVenta= new NegocioNotaVenta();
+            String html=negocioNotaVenta.obtenerNotaVentaHTML(id);
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarMostrarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+    }
+    
+    public void listarNotasVenta(){
+        try {
+            NegocioNotaVenta negocioNotaVenta= new NegocioNotaVenta();
+            String html=negocioNotaVenta.obtenerNotasVentaHTML();
+            Templates t= new Templates();
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+    }
     
     
     
