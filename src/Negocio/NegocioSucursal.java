@@ -61,8 +61,10 @@ public class NegocioSucursal {
                 "    <label><b>Direccion</b> </label>\n" +
                 "    <p class=\"tecno_input\">"+datosSucursal.getDireccion()+"</p>\n" +
                 "</div>\n";
+        String html2 = "";
+        html2 = new NegocioEquipo().obtenerEquiposHTMLporSucursal(id);
 
-        return html;
+        return html + "\n<br>\n" +html2;
     }
 
     public String obtenerSucursalHTMLporContrato(Integer id_contrato){

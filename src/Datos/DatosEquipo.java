@@ -196,13 +196,14 @@ public class DatosEquipo extends Tabla{
                 equipo.ano_fabricacion=resultado.getInt("ano_fabricacion");
                 equipo.capacidad= resultado.getFloat("capacidad");
                 equipo.sucursal_id=resultado.getInt("sucursal_id");
+                equipo.ubicacion=resultado.getString("ubicacion");
                 equipo.tipo_clasificacion_id=resultado.getInt("tipo_clasificacion_id");
                 equipo.marca_clasificacion_id=resultado.getInt("marca_clasificacion_id");
                 equipo.deleted_at= resultado.getString("deleted_at");
                 lista.add(equipo);
                         }
         } catch (SQLException ex) {
-            new Exception("error get lista datos equpo");
+            new Exception("error get lista datos equipo");
         }
         return lista;
     }

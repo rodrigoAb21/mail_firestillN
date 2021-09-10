@@ -6,6 +6,8 @@
 package Negocio;
 
 import Datos.DatosFichaTecnica;
+import Datos.DatosTrabajador;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -130,19 +132,25 @@ public class NegocioFichaTecnica {
             String resultado=ficha_tecnica.getResultado();
             Integer equipo_id=ficha_tecnica.getEquipo_id();
             Integer trabajador_id=ficha_tecnica.getTrabajador_id();
-            
+
+            DatosTrabajador datosTrabajador = new DatosTrabajador().obtener(ficha_tecnica.getTrabajador_id());
+
+
             contenido+="<tr class=\"trDatosTecno\">\n" +
-                       "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
-                    
-                       "<td >"+
-                             "<li>"+
-                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarFichaInspeccion:"+id+"\">Mostrar </a>\n" +
-                             "</li>"+
-                             "<li>"+
-                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= eliminarFichaInspeccion:"+id+"\">Eliminar </a>\n" +
-                             "</li>"+
-                       "</td>\n" +
-                       "</tr>\n";
+                    "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
+                    "<td class=\"tdcol1Tecno\">"+fecha+"</td>\n" +
+                    "<td class=\"tdcol1Tecno\">"+equipo_id+"</td>\n" +
+                    "<td class=\"tdcol1Tecno\">"+datosTrabajador.getNombre() + " " + datosTrabajador.getApellido() +"</td>\n" +
+                    "<td class=\"tdcol1Tecno\">"+resultado+"</td>\n" +
+                    "<td >"+
+                    "<li>"+
+                    "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarFichaInspeccion:"+id+"\">Mostrar </a>\n" +
+                    "</li>"+
+                    "<li>"+
+                    "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= eliminarFichaInspeccion:"+id+"\">Eliminar </a>\n" +
+                    "</li>"+
+                    "</td>\n" +
+                    "</tr>\n";
         }
         
         html="<h2>Fichas de inspeccion</h2>"+
@@ -152,7 +160,8 @@ public class NegocioFichaTecnica {
             "    <tr class=\"trCamposTecno\">\n" +
             "      <th >ID</th>\n"+
             "      <th class=\"thcolxTecno\">Fecha</th>\n" +
-            "      <th class=\"thcolxTecno\">Inspector</th>\n" + 
+            "      <th class=\"thcolxTecno\">Equipo</th>\n" +
+            "      <th class=\"thcolxTecno\">Inspector</th>\n" +
             "      <th class=\"thcolxTecno\">Resultado</th>\n" + 
             "      <th class=\"thcolxTecno\">Opciones</th>\n" +                
             "    </tr>\n" +
@@ -236,6 +245,60 @@ public class NegocioFichaTecnica {
             "</table>";
         
         
+        return html;
+    }
+
+    public String obtenerFichasTecnicasHTMLporEquipo(int equipo_id){
+        DatosFichaTecnica datosFichaTecnica = new DatosFichaTecnica();
+        ArrayList<DatosFichaTecnica> lista= obtenerFichasTecnicas();
+        String html="";
+
+        String contenido="";
+        for (DatosFichaTecnica ficha_tecnica : lista) {
+            if (equipo_id == ficha_tecnica.getEquipo_id()){
+                Integer id= ficha_tecnica.getId();
+                Date fecha=ficha_tecnica.getFecha();
+                Float carga=ficha_tecnica.getCarga();
+                String observacion=ficha_tecnica.getObservacion();
+                String resultado=ficha_tecnica.getResultado();
+                DatosTrabajador datosTrabajador = new DatosTrabajador().obtener(ficha_tecnica.getTrabajador_id());
+
+
+                contenido+="<tr class=\"trDatosTecno\">\n" +
+                        "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
+                        "<td class=\"tdcol1Tecno\">"+fecha+"</td>\n" +
+                        "<td class=\"tdcol1Tecno\">"+datosTrabajador.getNombre() + " " + datosTrabajador.getApellido() +"</td>\n" +
+                        "<td class=\"tdcol1Tecno\">"+resultado+"</td>\n" +
+                        "<td >"+
+                        "<li>"+
+                        "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarFichaInspeccion:"+id+"\">Mostrar </a>\n" +
+                        "</li>"+
+                        "<li>"+
+                        "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= eliminarFichaInspeccion:"+id+"\">Eliminar </a>\n" +
+                        "</li>"+
+                        "</td>\n" +
+                        "</tr>\n";
+            }
+        }
+
+        html="<h2>Fichas de inspeccion</h2>"+
+                "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarFichaInspeccion: EQUIPO_ID, CARGA, OBSERVACION, RESULTADO\">Registrar Ficha Inspeccion</a><br>" +
+                "<table class=\"tablaTecno\">\n" +
+                "  <thead>\n" +
+                "    <tr class=\"trCamposTecno\">\n" +
+                "      <th >ID</th>\n"+
+                "      <th class=\"thcolxTecno\">Fecha</th>\n" +
+                "      <th class=\"thcolxTecno\">Inspector</th>\n" +
+                "      <th class=\"thcolxTecno\">Resultado</th>\n" +
+                "      <th class=\"thcolxTecno\">Opciones</th>\n" +
+                "    </tr>\n" +
+                "  </thead>\n" +
+                "  <tbody>\n" +
+                contenido+
+                "  </tbody>\n" +
+                "</table>";
+
+
         return html;
     }
     
