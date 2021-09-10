@@ -143,6 +143,7 @@ public class NegocioProveedor {
                              "<li>"+
                              "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarProveedor:"+id+"\">Mostrar </a>\n" +
                              "</li>"+
+                             "<li>"+
                              "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= editarProveedor:"+id+", "+nombre+", "+nit+", "+email+", "+direccion+", "+telefono+", "+informacion+","+titular+", "+banco+", "+sucursal+", "+nro_cuenta+", "+moneda+", "+ tipo_identificacion+", "+nro_identificacion+"\">Editar </a>\n" +
                              "</li>"+
                              "<li>"+
@@ -152,7 +153,7 @@ public class NegocioProveedor {
                        "</tr>\n";
         }
         
-        html="<h2>Trabajadores</h2>"+
+        html="<h2>Proveedores</h2>"+
              "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarProveedor: NOMBRE, NIT, EMAIL, DIRECCION, TELEFONO, INFORMACION, TITULAR, BANCO, SUCURSAL, NRO_CUENTA, MONEDA, TIPO_IDENTIFICACION, NRO_IDENTIFICACION\">Registrar Proveedor</a><br>" +
             "<table class=\"tablaTecno\">\n" +
             "  <thead>\n" +

@@ -115,6 +115,7 @@ public class NegocioNotaVenta {
 
         }
         html="<h2>Notas de Venta</h2>" +
+                "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarVenta: CLIENTE_ID, PRODUCTO_ID, CANTIDAD, PRODUCTO_ID, CANTIDAD,...\">Registrar Venta</a><br>" + 
                 "<table class=\"tablaTecno\">\n" +
                 "  <thead>\n" +
                 "    <tr class=\"trCamposTecno\">\n" +

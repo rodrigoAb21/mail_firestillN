@@ -135,7 +135,7 @@ public class NegocioCliente {
                        "</tr>\n";
         }
         
-        html="<h2>Trabajadores</h2>"+
+        html="<h2>Clientes</h2>"+
              "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarCliente: NOMBRE_EMPRESA, NIT, TELEFONO_EMPRESA, EMAIL, DIRECCION, NOMBRE_ENCARGADO, CARGO_ENCARGADO, EMAIL_ENCARGADO, TELEFONO_ENCARGADO\">Registrar Cliente</a><br>" + 
             "<table class=\"tablaTecno\">\n" +
             "  <thead>\n" +

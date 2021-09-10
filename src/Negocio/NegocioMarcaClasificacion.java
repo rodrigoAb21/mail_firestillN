@@ -87,7 +87,10 @@ public class NegocioMarcaClasificacion {
                        "</tr>\n";
         }
         
-        html="<table class=\"tablaTecno\">\n" +
+        html="<h2>Marcas de extintores</h2>"+
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarMarcaClasificacion: NOMBRE\">Registrar Marca Clasificacion</a><br>" +
+            
+            "<table class=\"tablaTecno\">\n" +
             "  <thead>\n" +
             "    <tr class=\"trCamposTecno\">\n" +
             "      <th >ID</th>\n"+

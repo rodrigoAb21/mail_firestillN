@@ -117,6 +117,7 @@ public class NegocioProducto {
                              "<li>"+
                              "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarProducto:"+id+"\">Mostrar </a>\n" +
                              "</li>"+
+                             "<li>"+
                              "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= editarProducto:"+id+", "+categoria_id+", "+nombre+", "+precio+", "+descripcion+"\">Editar </a>\n" +
                              "</li>"+
                              "<li>"+
@@ -127,7 +128,7 @@ public class NegocioProducto {
         }
         
         html="<h2>Productos</h2>"+
-             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarProducto: CATEGORIA_ID, NOMBRE, DESCRIPCION, PRECIO\">Registrar Administrador</a><br>" +
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarProducto: CATEGORIA_ID, NOMBRE, DESCRIPCION, PRECIO\">Registrar Producto</a><br>" +
             
             "<table class=\"tablaTecno\">\n" +
             "  <thead>\n" +

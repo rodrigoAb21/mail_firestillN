@@ -119,9 +119,9 @@ public class NegocioTrabajador {
         }
         
         html="<h2>Trabajadores</h2>"+
-             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarTrabajadorAdmin:NOMBRE, APELLIDO, CARNET, TELEFONO, DIRECCION, EMAIL\">Registrar Administrador</a><br>" +
-             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarTrabajadorVentas:NOMBRE, APELLIDO, CARNET, TELEFONO, DIRECCION, EMAIL\">Registrar empleado de Ventas</a><br>" +
-             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarTrabajadorMantenimiento:NOMBRE, APELLIDO, CARNET, TELEFONO,DIRECCION, EMAIL\">Registrar empleado de Mantenimiento</a><br>" + 
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarTrabajadorAdmin: NOMBRE, APELLIDO, CARNET, TELEFONO, DIRECCION, EMAIL\">Registrar Administrador</a><br>" +
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarTrabajadorVentas: NOMBRE, APELLIDO, CARNET, TELEFONO, DIRECCION, EMAIL\">Registrar empleado de Ventas</a><br>" +
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarTrabajadorTecnico: NOMBRE, APELLIDO, CARNET, TELEFONO,DIRECCION, EMAIL\">Registrar empleado Tecnico</a><br>" + 
             "<table class=\"tablaTecno\">\n" +
             "  <thead>\n" +
             "    <tr class=\"trCamposTecno\">\n" +

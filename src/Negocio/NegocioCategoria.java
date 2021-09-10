@@ -86,7 +86,9 @@ public class NegocioCategoria {
                        "</tr>\n";
         }
         
-        html="<table class=\"tablaTecno\">\n" +
+        html="<h2>Trabajadores</h2>"+
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarCategoria: NOMBRE\">Registrar Categoria</a><br>" + 
+                "<table class=\"tablaTecno\">\n" +
             "  <thead>\n" +
             "    <tr class=\"trCamposTecno\">\n" +
             "      <th >ID</th>\n"+

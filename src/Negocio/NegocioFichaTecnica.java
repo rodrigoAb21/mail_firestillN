@@ -29,7 +29,20 @@ public class NegocioFichaTecnica {
         datosFichaTecnica.setCarga(carga);
         datosFichaTecnica.setObservacion(observacion);
         datosFichaTecnica.setResultado(resultado);
-        
+        datosFichaTecnica.seteCanioPesca("Bueno");
+        datosFichaTecnica.seteZuncho("Bueno");
+        datosFichaTecnica.seteChasis("Bueno");
+        datosFichaTecnica.seteRueda("Bueno");
+        datosFichaTecnica.seteRosca("Bueno");
+        datosFichaTecnica.seteManguera("Bueno");
+        datosFichaTecnica.seteValvula("Bueno");
+        datosFichaTecnica.seteTobera("Bueno");
+        datosFichaTecnica.seteRobinete("Bueno");
+        datosFichaTecnica.setePalanca("Bueno");
+        datosFichaTecnica.seteManometro("Bueno");
+        datosFichaTecnica.seteVastago("Bueno");
+        datosFichaTecnica.seteDifusor("Bueno");
+        datosFichaTecnica.seteDisco("Bueno");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         String fecha = dtf.format(LocalDateTime.now());
         Date fecha_hoy=new Date(fecha);

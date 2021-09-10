@@ -125,7 +125,7 @@ public class NegocioContrato {
                              "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= editarContrato:"+id+", "+cliente_id+", "+fecha_inicio+", "+fecha_fin+", "+periodo+"\">Editar </a>\n" +
                              "</li>"+
                              "<li>"+
-                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= finalizarEdicion:"+id+"\">Finalizar Edicion </a>\n" +
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= finalizarEdicionContrato:"+id+"\">Finalizar Edicion </a>\n" +
                              "</li>";
              }
             contenido+="<tr class=\"trDatosTecno\">\n" +

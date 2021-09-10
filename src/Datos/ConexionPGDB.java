@@ -32,10 +32,10 @@ public class ConexionPGDB {
        this.puerto = "5432";
         */
         this.conexion = null;
-       this.host = "localhost";
-       this.db_name = "firestill";
-       this.user = "postgres";
-       this.password = "postgres";
+       this.host = "mail.tecnoweb.org.bo";
+       this.db_name = "db_grupo13sc";
+       this.user = "grupo13sc";
+       this.password = "grup013grup013";
        this.puerto = "5432";
     }
     

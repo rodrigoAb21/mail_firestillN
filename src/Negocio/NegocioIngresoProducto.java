@@ -117,7 +117,9 @@ public class NegocioIngresoProducto {
                     "</tr>\n";
 
         }
-        html="<h2>Ingresos de Productos</h2>" +
+        html="<h2>Ingresos de Productos</h2>"+
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarIngresoProducto: PROVEEDOR_ID, NRO_FACTURA, PRODUCTO_ID, CANTIDAD, COSTO, ...\">Registrar Ingreso Producto</a><br>" +
+            
                 "<table class=\"tablaTecno\">\n" +
                 "  <thead>\n" +
                 "    <tr class=\"trCamposTecno\">\n" +

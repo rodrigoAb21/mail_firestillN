@@ -315,7 +315,7 @@ public class ComandoFirestill {
                     listarFichasTecnicas();
                     break;
                     
-                    case "listarPartes":
+                    case "listarpartes":
                     listarPartes();    
                     
                     //Ingreso producto
@@ -346,11 +346,11 @@ public class ComandoFirestill {
                     case "anularnotaventa":
                     anularNotaVenta(s[1]);    
                     
-                    case "mostrarNotaVenta":
+                    case "mostrarnotaventa":
                     mostrarNotaVenta(s[1]);
                     break;
                     
-                    case "listarNotaVenta":
+                    case "listarnotasventa":
                     listarNotasVenta();
                     break;
                     
@@ -1074,7 +1074,7 @@ public class ComandoFirestill {
             NegocioContrato negocioContrato= new NegocioContrato();
             Integer id = negocioContrato.registrar(cliente_id, ejecutor.getId(), fecha_inicio, fecha_fin, periodo);
             ClienteSMTP mensajero= new ClienteSMTP();
-            mensajero.enviarMensaje(correo, "","La baja de producto fue registrada exitosamente.");
+            mensajero.enviarMensaje(correo, "","El contrato fue registrado exitosamente.");
         } catch (Exception e) {
             System.out.println("Error al catch de firestill");
             ClienteSMTP mensajero= new ClienteSMTP();
@@ -1329,26 +1329,26 @@ public class ComandoFirestill {
     private void registrarFichaTecnica(String data) {
         String[] values = data.split(",");
         try {
-            Integer trabajador_id = getInteger_NOT_NULL(values[0]);
-            Integer equipo_id = getInteger_NOT_NULL(values[1]);
+            Integer equipo_id = getInteger_NOT_NULL(values[0]);
             Float carga = getFloat(values[1]);
             String observacion = getString(values[2]);
             String resultado = getString_NOT_NULL(values[3]);
             
             int contador=1;
-            while (contador<=14 && (contador-1+4)<=values.length) {
+            while (contador<=14 && (contador+4)<=values.length) {
+                System.out.println("reviso:   "+contador);
                 Integer nro_pieza=getInteger_NOT_NULL(values[contador-1+4]);
                 if(nro_pieza>=1 && nro_pieza<=14){
                     contador++;
                 }else{
-                    new Exception();
+                    new Exception("entro a la excepcion");
                 }
                 
             }
             
             NegocioFichaTecnica negocioFichaTecnica= new NegocioFichaTecnica();
             Integer id = negocioFichaTecnica.registrar(ejecutor.getId(), equipo_id, carga, observacion, resultado);
-            
+            /*
             contador=1;
             while (contador<=14 && (contador-1+4)<=values.length) {
                 Integer nro_pieza=getInteger_NOT_NULL(values[contador-1+4]);
@@ -1357,6 +1357,7 @@ public class ComandoFirestill {
             
             ClienteSMTP mensajero= new ClienteSMTP();
             mensajero.enviarMensaje(correo, "","La ficha de inspeccion fue registrada exitosamente.");
+*/
         } catch (Exception e) {
             System.out.println("Error al catch de firestill");
             ClienteSMTP mensajero= new ClienteSMTP();
@@ -1738,7 +1739,9 @@ public class ComandoFirestill {
 //        c.ejecutarComando("nath.1475369@gmail.com", "eliminarMarcaClasificacion:");
 //        c.ejecutarComando("nath.1475369@gmail.com", "mostrarMarcaClasificacion:2");
             //cliente_id, producto_id, cantidad,...
-          c.ejecutarComando("nath.1475369@gmail.com", "registrarNotaVenta:1,2,1000000");
+         // c.ejecutarComando("rodrigo.abasto21@gmail.com", "listarNotasVenta");
+          c.ejecutarComando("nath.1475369@gmail.com", "registrarFichaInspeccion:1,20,en buen estado, finalizado,1,2");
+          //c.ejecutarComando("nath.1475369@gmail.com", "listarFichasInspeccion");
     }
     
 }

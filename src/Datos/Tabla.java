@@ -34,6 +34,7 @@ public abstract class Tabla {
         Integer key=null;
         conexion.abrirConexion();
         String sql = getSqlInsert();
+        System.out.println(sql);
         System.out.println("sql tabla::::"+sql);
         Statement stmt;
         try {

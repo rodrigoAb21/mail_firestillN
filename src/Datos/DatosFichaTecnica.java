@@ -269,6 +269,8 @@ public class DatosFichaTecnica extends Tabla{
                 +getSQLString(this.equipo_id)+","
                 +getSQLString(this.trabajador_id)
                 +");";
+        
+        
         return sql;
     }
     
