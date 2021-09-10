@@ -73,9 +73,20 @@ public class NegocioProducto {
     public String obtenerProductoHTML(int id){
         DatosProducto datosProducto= new DatosProducto();
         datosProducto = datosProducto.obtener(id);
-        String html="";
-        
-        //faltaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        DatosCategoria datosCategoria = new DatosCategoria();
+        datosCategoria = datosCategoria.obtener(datosProducto.getCategoria_id());
+        String html = "<h2>Ver Producto: "+datosProducto.getId()+"</h2>\n" +
+                "<div class=\"tecno_recuadro\">\n" +
+                "    <label><b>Nombre</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProducto.getNombre()+"</p>\n" +
+                "    <label><b>Precio Bs</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProducto.getPrecio()+"</p>\n" +
+                "    <label><b>Categoria</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosCategoria.getNombre()+"</p>\n" +
+                "    <label><b>Descripcion</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProducto.getDescripcion()+"</p>\n" +
+                "</div>\n";
+
         
         return html;
         

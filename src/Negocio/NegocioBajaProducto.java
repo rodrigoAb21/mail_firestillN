@@ -66,8 +66,19 @@ public class NegocioBajaProducto {
     public String obtenerBajaProductoHTML(int id){
         DatosBajaProducto datosBajaProducto= new DatosBajaProducto();
         datosBajaProducto = datosBajaProducto.obtener(id);
-        String html="";
-        html=" ";
+        DatosProducto datosProducto = new DatosProducto();
+        datosProducto = datosProducto.obtener(datosBajaProducto.getProducto_id());
+        String html = "<h2>Ver Baja: "+datosBajaProducto.getId()+"</h2>\n" +
+                "<div class=\"tecno_recuadro\">\n" +
+                "    <label><b>Producto</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosProducto.getNombre()+"</p>\n" +
+                "    <label><b>Fecha</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosBajaProducto.getFecha()+"</p>\n" +
+                "    <label><b>Cantidad</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosBajaProducto.getCantidad()+"</p>\n" +
+                "    <label><b>Motivo</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosBajaProducto.getMotivo()+"</p>\n" +
+                "</div>\n";
         
         return html;
         
