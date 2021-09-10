@@ -638,7 +638,7 @@ public class ComandoFirestill {
             String html=negocioTrabajador.obtenerTrabajadorHTML(id);
             Templates t= new Templates();
             ClienteSMTP mensajero= new ClienteSMTP();
-            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+            mensajero.enviarMensaje(correo, "",t.generarMostrarHTML(html));
         } catch (Exception e) {
             System.out.println("Error al catch de firestill");
             ClienteSMTP mensajero= new ClienteSMTP();
@@ -919,7 +919,7 @@ public class ComandoFirestill {
             String html=negocioProducto.obtenerProductoHTML(id);
             Templates t= new Templates();
             ClienteSMTP mensajero= new ClienteSMTP();
-            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+            mensajero.enviarMensaje(correo, "",t.generarMostrarHTML(html));
         } catch (Exception e) {
             System.out.println("Error al catch de firestill");
             ClienteSMTP mensajero= new ClienteSMTP();
@@ -985,7 +985,7 @@ public class ComandoFirestill {
             String html=negocioBajaProducto.obtenerBajaProductoHTML(id);
             Templates t= new Templates();
             ClienteSMTP mensajero= new ClienteSMTP();
-            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+            mensajero.enviarMensaje(correo, "",t.generarMostrarHTML(html));
         } catch (Exception e) {
             System.out.println("Error al catch de firestill");
             ClienteSMTP mensajero= new ClienteSMTP();
@@ -1070,7 +1070,7 @@ public class ComandoFirestill {
             String html=negocioContrato.obtenerContratoHTML(id);
             Templates t= new Templates();
             ClienteSMTP mensajero= new ClienteSMTP();
-            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+            mensajero.enviarMensaje(correo, "",t.generarMostrarHTML(html));
         } catch (Exception e) {
             System.out.println("Error al catch de firestill");
             ClienteSMTP mensajero= new ClienteSMTP();
@@ -1153,7 +1153,7 @@ public class ComandoFirestill {
             String html=negocioSucursal.obtenerSucursalHTML(id);
             Templates t= new Templates();
             ClienteSMTP mensajero= new ClienteSMTP();
-            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+            mensajero.enviarMensaje(correo, "",t.generarMostrarHTML(html));
         } catch (Exception e) {
             System.out.println("Error al catch de firestill");
             ClienteSMTP mensajero= new ClienteSMTP();
@@ -1247,7 +1247,7 @@ public class ComandoFirestill {
             String html=negocioEquipo.obtenerEquipoHTML(id);
             Templates t= new Templates();
             ClienteSMTP mensajero= new ClienteSMTP();
-            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+            mensajero.enviarMensaje(correo, "",t.generarMostrarHTML(html));
         } catch (Exception e) {
             System.out.println("Error al catch de firestill");
             ClienteSMTP mensajero= new ClienteSMTP();
@@ -1335,7 +1335,7 @@ public class ComandoFirestill {
             String html=negocioFichaTecnica.obtenerFichaTecnicaHTML(id);
             Templates t= new Templates();
             ClienteSMTP mensajero= new ClienteSMTP();
-            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+            mensajero.enviarMensaje(correo, "",t.generarMostrarHTML(html));
         } catch (Exception e) {
             System.out.println("Error al catch de firestill");
             ClienteSMTP mensajero= new ClienteSMTP();
@@ -1387,7 +1387,7 @@ public class ComandoFirestill {
             String html=negocioIngresoProducto.obtenerIngresoProductoHTML(id);
             Templates t= new Templates();
             ClienteSMTP mensajero= new ClienteSMTP();
-            mensajero.enviarMensaje(correo, "",t.generarHTML(html));
+            mensajero.enviarMensaje(correo, "",t.generarMostrarHTML(html));
         } catch (Exception e) {
             System.out.println("Error al catch de firestill");
             ClienteSMTP mensajero= new ClienteSMTP();
