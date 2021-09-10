@@ -6,6 +6,8 @@
 package Negocio;
 
 import Datos.DatosEquipo;
+import Datos.DatosMarcaClasificacion;
+import Datos.DatosTipoClasificacion;
 import java.util.ArrayList;
 
 /**
@@ -74,9 +76,72 @@ public class NegocioEquipo {
     }
     
     public String obtenerEquiposHTML(){
-        String html= " ";
+        DatosEquipo datosEquipo = new DatosEquipo();
+        ArrayList<DatosEquipo> lista= obtenerEquipos();
+        String html="";
+        
+        String contenido="";
+        for (DatosEquipo equipo : lista) {
+            Integer id= equipo.getId();
+     String nro_serie= equipo.getNro_serie();
+     String descripcion=equipo.getDescripcion();
+     String unidad_medida=equipo.getUnidad_medida();
+     Integer ano_fabricacion=equipo.getAno_fabricacion();
+     Float capacidad= equipo.getCapacidad();
+     String ubicacion= equipo.getUbicacion();
+     Integer sucursal_id = equipo.getSucursal_id();
+     Integer tipo_clasificacion_id= equipo.getTipo_clasificacion_id();
+     Integer marca_clasificacion_id = equipo.getMarca_clasificacion_id();
+            
+     DatosTipoClasificacion tipo= new DatosTipoClasificacion();
+     String tipo_nombre= tipo.obtener(tipo_clasificacion_id).getNombre();
+     
+     DatosMarcaClasificacion marca= new DatosMarcaClasificacion();
+     String marca_nombre= marca.obtener(marca_clasificacion_id).getNombre();
+     
+            contenido+="<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
+                       "<td >"+nro_serie+"</td>\n" +
+                       "<td >"+capacidad+"</td>\n" + 
+                       "<td >"+tipo_nombre+"</td>\n" +
+                       "<td >"+marca_nombre+"</td>\n" +
+                       "<td >"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarEquipo:"+id+"\">Mostrar </a>\n" +
+                             "</li>"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= editarEquipo:"+id+", "+sucursal_id+", "+tipo_clasificacion_id+", "+marca_clasificacion_id+", "+nro_serie+", "+descripcion+", "+unidad_medida+", "+ano_fabricacion+", "+capacidad+", "+ubicacion+"\">Editar </a>\n" +
+                             "</li>"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarFichasTecnicas:"+id+"\">Mostrar Fichas Inspeccion</a>\n" +
+                             "</li>"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= eliminarEquipo:"+id+"\">Eliminar </a>\n" +
+                             "</li>"+
+                       "</td>\n" +
+                       "</tr>\n";
+        }
+        
+        html="<h2>Equipos</h2>"+
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarEquipo: SUCURSAL_ID, TIPO_CLASIFICACION_ID, MARCA_CLASIFICACION_ID, NRO_SERIE, DESCRIPCION, UNIDAD_MEDIDA, ANO_FABRICACION, CAPACIDAD, UBICACION\">Registrar Equipo</a><br>" +
+             "<table class=\"tablaTecno\">\n" +
+            "  <thead>\n" +
+            "    <tr class=\"trCamposTecno\">\n" +
+            "      <th >ID</th>\n"+
+            "      <th class=\"thcolxTecno\">Nro de Serie</th>\n" +
+            "      <th class=\"thcolxTecno\">Capacidad</th>\n" + 
+            "      <th class=\"thcolxTecno\">Tipo</th>\n" + 
+            "      <th class=\"thcolxTecno\">Marca</th>\n" + 
+            "      <th class=\"thcolxTecno\">Opciones</th>\n" +                
+            "    </tr>\n" +
+            "  </thead>\n" +
+            "  <tbody>\n" +    
+                contenido+
+            "  </tbody>\n" +
+            "</table>";
+        
+        
         return html;
     }
-    
     
 }

@@ -7,6 +7,7 @@ package Negocio;
 
 import Datos.DatosFichaTecnica;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -85,13 +86,13 @@ public class NegocioFichaTecnica {
         }
     }
     
-    public DatosFichaTecnica obtenerTipoClasificacion(int id){
+    public DatosFichaTecnica obtenerFichaTecnica(int id){
         DatosFichaTecnica datosFichaTecnica = new DatosFichaTecnica();
         datosFichaTecnica= datosFichaTecnica.obtener(id);
         return datosFichaTecnica;
     }
     
-    public ArrayList<DatosFichaTecnica> obtenerTiposClasificacion(){
+    public ArrayList<DatosFichaTecnica> obtenerFichasTecnicas(){
         DatosFichaTecnica datosFichaTecnica = new DatosFichaTecnica();
         ArrayList<DatosFichaTecnica> lista = datosFichaTecnica.obtener();
         return lista;
@@ -109,16 +110,53 @@ public class NegocioFichaTecnica {
     }
     
     public String obtenerFichasTecnicasHTML(){
-        DatosFichaTecnica datosFichaTecnica= new DatosFichaTecnica();
-        ArrayList<DatosFichaTecnica> lista = datosFichaTecnica.obtener();
+        DatosFichaTecnica datosFichaTecnica = new DatosFichaTecnica();
+        ArrayList<DatosFichaTecnica> lista= obtenerFichasTecnicas();
         String html="";
         
         String contenido="";
-        for (DatosFichaTecnica tipoClasificacion : lista) {
+        for (DatosFichaTecnica ficha_tecnica : lista) {
+            Integer id= ficha_tecnica.getId();
+            Date fecha=ficha_tecnica.getFecha();
+            Float carga=ficha_tecnica.getCarga();
+            String observacion=ficha_tecnica.getObservacion();
+            String resultado=ficha_tecnica.getResultado();
+            Integer equipo_id=ficha_tecnica.getEquipo_id();
+            Integer trabajador_id=ficha_tecnica.getTrabajador_id();
+            
+            contenido+="<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
+                    
+                       "<td >"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarFichaInspeccion:"+id+"\">Mostrar </a>\n" +
+                             "</li>"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= eliminarFichaInspeccion:"+id+"\">Eliminar </a>\n" +
+                             "</li>"+
+                       "</td>\n" +
+                       "</tr>\n";
         }
         
-        return html;
+        html="<h2>Fichas de inspeccion</h2>"+
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarFichaInspeccion: EQUIPO_ID, CARGA, OBSERVACION, RESULTADO\">Registrar Ficha Inspeccion</a><br>" +
+             "<table class=\"tablaTecno\">\n" +
+            "  <thead>\n" +
+            "    <tr class=\"trCamposTecno\">\n" +
+            "      <th >ID</th>\n"+
+            "      <th class=\"thcolxTecno\">Fecha</th>\n" +
+            "      <th class=\"thcolxTecno\">Inspector</th>\n" + 
+            "      <th class=\"thcolxTecno\">Resultado</th>\n" + 
+            "      <th class=\"thcolxTecno\">Opciones</th>\n" +                
+            "    </tr>\n" +
+            "  </thead>\n" +
+            "  <tbody>\n" +    
+                contenido+
+            "  </tbody>\n" +
+            "</table>";
         
+        
+        return html;
     }
     
 }

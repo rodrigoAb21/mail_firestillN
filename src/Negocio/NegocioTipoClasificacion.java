@@ -67,31 +67,42 @@ public class NegocioTipoClasificacion {
     }
     
     public String obtenerTiposClasificacionHTML(){
-        DatosTipoClasificacion datosTipoClasificacion= new DatosTipoClasificacion();
-        ArrayList<DatosTipoClasificacion> lista = datosTipoClasificacion.obtener();
+        DatosTipoClasificacion datosTipoClasificacion = new DatosTipoClasificacion();
+        ArrayList<DatosTipoClasificacion> lista= obtenerTiposClasificacion();
         String html="";
         
         String contenido="";
         for (DatosTipoClasificacion tipoClasificacion : lista) {
+            Integer id= tipoClasificacion.getId();
+            String nombre= tipoClasificacion.getNombre();
+            
             contenido+="<tr class=\"trDatosTecno\">\n" +
-                       "<td class=\"tdcol1Tecno\">"+tipoClasificacion.getId()+"</td>\n" +
-                       "<td >"+tipoClasificacion.getNombre()+"</td>\n" +
+                       "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
+                       "<td >"+nombre+"</td>\n" +       
                        "<td >"+
                              "<li>"+
-                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= editarTipoClasificacion:"+tipoClasificacion.getId()+", "+tipoClasificacion.getNombre()+"\">Editar </a>\n" +
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarTipoClasificacion: "+id+"\">Mostrar </a>\n" +
                              "</li>"+
                              "<li>"+
-                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= eliminarTipoClasificacion:"+tipoClasificacion.getId()+"\">Eliminar </a>\n" +
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= editarTipoClasificacion: "+id+", "+nombre+"\">Editar </a>\n" +
+                             "</li>"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= eliminarTipoClasificacion: "+id+"\">Eliminar </a>\n" +
                              "</li>"+
                        "</td>\n" +
                        "</tr>\n";
         }
         
-        html="<table class=\"tablaTecno\">\n" +
+        html="<h2>Clasificacion de extintores</h2>"+
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarTipoClasificacion: NOMBRE\">Registrar Tipo Clasificacion</a><br>" +
+            "<table class=\"tablaTecno\">\n" +
             "  <thead>\n" +
             "    <tr class=\"trCamposTecno\">\n" +
             "      <th >ID</th>\n"+
             "      <th class=\"thcolxTecno\">Nombre</th>\n" +
+            "      <th class=\"thcolxTecno\">Apellido</th>\n" +
+            "      <th class=\"thcolxTecno\">Tipo</th>\n" +
+            "      <th class=\"thcolxTecno\">Telefono</th>\n" +    
             "      <th class=\"thcolxTecno\">Opciones</th>\n" +                
             "    </tr>\n" +
             "  </thead>\n" +
@@ -102,7 +113,6 @@ public class NegocioTipoClasificacion {
         
         
         return html;
-        
     }
     
     

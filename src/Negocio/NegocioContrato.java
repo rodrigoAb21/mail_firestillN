@@ -73,7 +73,72 @@ public class NegocioContrato {
     }
     
     public String obtenerContratosHTML(){
+        DatosContrato datosContrato = new DatosContrato();
+        ArrayList<DatosContrato> lista= obtenerContratos();
         String html="";
+        
+        String contenido="";
+        for (DatosContrato contrato : lista) {
+            
+             Integer id = contrato.getId() ;
+             Date fecha_inicio= contrato.getFecha_inicio();
+             Date fecha_fin =contrato.getFecha_fin();
+             String estado=contrato.getEstado();
+             boolean edicion=contrato.isEdicion();
+             Integer periodo= contrato.getPeriodo();
+             String documento=contrato.getDocumento();
+             Integer cliente_id= contrato.getCliente_id();
+             Integer trabajador_id= contrato.getTrabajador_id();
+             
+             DatosCliente cliente= new DatosCliente();
+             String cliente_nombre= cliente.obtener(cliente_id).getNombre_empresa();
+            
+             String opciones= "";
+             if(edicion==true){
+                 opciones="<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= editarContrato:"+id+", "+cliente_id+", "+fecha_inicio+", "+fecha_fin+", "+periodo+"\">Editar </a>\n" +
+                             "</li>"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= finalizarEdicion:"+id+"\">Finalizar Edicion </a>\n" +
+                             "</li>";
+             }
+            contenido+="<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
+                       "<td >"+cliente_nombre+"</td>\n" +
+                       "<td >"+fecha_inicio+"</td>\n" +       
+                       "<td >"+fecha_fin+"</td>\n" +
+                       "<td >"+periodo+"</td>\n" +        
+                       "<td >"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarContrato:"+id+"\">Mostrar </a>\n" +
+                             "</li>"+
+                             opciones +
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= eliminarContrato:"+id+"\">Eliminar </a>\n" +
+                             "</li>"+
+                       "</td>\n" +
+                       "</tr>\n";
+        }
+        
+        html="<h2>Contratos</h2>"+
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarContrato: CLIENTE_ID, FECHA_INICIO, FECHA_FIN, PERIODO_ENTRE_REVISIONES\">Registrar Contrato</a><br>" +
+            "<table class=\"tablaTecno\">\n" +
+            "  <thead>\n" +
+            "    <tr class=\"trCamposTecno\">\n" +
+            "      <th >ID</th>\n"+
+            "      <th class=\"thcolxTecno\">Cliente</th>\n" +     
+            "      <th class=\"thcolxTecno\">Fecha Inicio</th>\n" +
+            "      <th class=\"thcolxTecno\">Fecha Fin</th>\n" +
+            "      <th class=\"thcolxTecno\">Periodo</th>\n" +   
+            "      <th class=\"thcolxTecno\">Opciones</th>\n" +                
+            "    </tr>\n" +
+            "  </thead>\n" +
+            "  <tbody>\n" +    
+                contenido+
+            "  </tbody>\n" +
+            "</table>";
+        
+        
         return html;
     }
     

@@ -5,6 +5,7 @@
  */
 package Negocio;
 
+import Datos.DatosCategoria;
 import Datos.DatosProducto;
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ public class NegocioProducto {
         
     }
     
-    public Integer registrar( Integer categoria_id, String nombre, String descripcion, Float precio, Integer cantidad){
+    public Integer registrar( Integer categoria_id, String nombre, String descripcion, Float precio){
         DatosProducto datosProducto = new DatosProducto();
         datosProducto.setNombre(nombre);
         datosProducto.setDescripcion(descripcion);
@@ -34,6 +35,16 @@ public class NegocioProducto {
         datosProducto.setDescripcion(descripcion);
         datosProducto.setPrecio(precio);
         datosProducto.setCantidad(cantidad);
+        datosProducto.editar();
+    }
+    
+    public void editar2(int id, Integer categoria_id,String nombre, Float precio, String descripcion){
+        DatosProducto datosProducto = new DatosProducto();
+        datosProducto= datosProducto.obtener(id);
+        datosProducto.setCategoria_id(categoria_id);
+        datosProducto.setNombre(nombre);
+        datosProducto.setDescripcion(descripcion);
+        datosProducto.setPrecio(precio);
         datosProducto.editar();
     }
     
@@ -71,18 +82,60 @@ public class NegocioProducto {
     }
     
     public String obtenerProductosHTML(){
-        DatosProducto datosProducto= new DatosProducto();
-        ArrayList<DatosProducto> lista = datosProducto.obtener();
+        DatosProducto datosProducto = new DatosProducto();
+        ArrayList<DatosProducto> lista= obtenerProductos();
         String html="";
         
         String contenido="";
         for (DatosProducto producto : lista) {
-            //faltaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             Integer id = producto.getId();
+            String nombre=producto.getNombre();
+            String descripcion=producto.getDescripcion();
+            Float precio=producto.getPrecio();
+            Integer cantidad =producto.getCantidad();
+            int categoria_id=producto.getCategoria_id();
+            
+            DatosCategoria datosCategoria= new DatosCategoria();
+            String categoria_nombre= datosCategoria.obtener(categoria_id).getNombre();
+            
+            contenido+="<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
+                       "<td >"+nombre+"</td>\n" +
+                       "<td >"+categoria_nombre+"</td>\n" +       
+                       "<td >"+cantidad+"</td>\n" +    
+                       "<td >"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarProducto:"+id+"\">Mostrar </a>\n" +
+                             "</li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= editarProducto:"+id+", "+categoria_id+", "+nombre+", "+precio+", "+descripcion+"\">Editar </a>\n" +
+                             "</li>"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= eliminarProducto:"+id+"\">Eliminar </a>\n" +
+                             "</li>"+
+                       "</td>\n" +
+                       "</tr>\n";
         }
+        
+        html="<h2>Productos</h2>"+
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarProducto: CATEGORIA_ID, NOMBRE, DESCRIPCION, PRECIO\">Registrar Administrador</a><br>" +
+            
+            "<table class=\"tablaTecno\">\n" +
+            "  <thead>\n" +
+            "    <tr class=\"trCamposTecno\">\n" +
+            "      <th >ID</th>\n"+
+            "      <th class=\"thcolxTecno\">Nombre</th>\n" +
+            "      <th class=\"thcolxTecno\">Categoria</th>\n" +
+            "      <th class=\"thcolxTecno\">Cantidad</th>\n" +  
+            "      <th class=\"thcolxTecno\">Opciones</th>\n" +                
+            "    </tr>\n" +
+            "  </thead>\n" +
+            "  <tbody>\n" +    
+                contenido+
+            "  </tbody>\n" +
+            "</table>";
         
         
         return html;
-        
     }
     
 }

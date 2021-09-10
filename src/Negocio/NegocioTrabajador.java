@@ -108,6 +108,7 @@ public class NegocioTrabajador {
                              "<li>"+
                              "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarTrabajador:"+id+"\">Mostrar </a>\n" +
                              "</li>"+
+                             "<li>"+
                              "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= editarTrabajador:"+id+", "+nombre+", "+apellido+", "+direccion+", "+carnet+", "+telefono+", "+email+","+"NUEVA CONTRASEÑA"+"\">Editar </a>\n" +
                              "</li>"+
                              "<li>"+

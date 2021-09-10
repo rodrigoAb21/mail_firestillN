@@ -228,6 +228,10 @@ public class ComandoFirestill {
                     editarContrato(s[1]);
                     break;
                     
+                    case "finalizarcontrato":
+                    finalizarEdicion(s[1]);
+                    break;
+                    
                     case "eliminarcontrato":
                     eliminarContrato(s[1]);
                     break;
@@ -282,19 +286,19 @@ public class ComandoFirestill {
                     listarEquipos();
                     
                     //Ficha tecnica
-                    case "registrarfichatecnica":
+                    case "registrarfichainspeccion":
                     registrarFichaTecnica(s[1]);
                     break;
                     
-                    case "eliminarfichatecnica":
+                    case "eliminarfichainspeccion":
                     eliminarFichaTecnica(s[1]);
                     break;
                     
-                    case "mostrarfichatecnica":
+                    case "mostrarfichainspeccion":
                     mostrarFichaTecnica(s[1]);
                     break;
                     
-                    case "listarfichastecnicas":
+                    case "listarfichasinspeccion":
                     listarFichasTecnicas();
                     break;
                     
@@ -862,9 +866,8 @@ public class ComandoFirestill {
             String nombre = getString_NOT_NULL(values[1]);
             String descripcion = getString(values[2]);
             Float precio = getFloat_NOT_NULL(values[3]);
-            Integer cantidad = getInteger_NOT_NULL(values[4]);
             NegocioProducto negocioProducto= new NegocioProducto();
-            Integer id = negocioProducto.registrar(categoria_id, nombre, descripcion, precio, cantidad);
+            Integer id = negocioProducto.registrar(categoria_id, nombre, descripcion, precio);
             ClienteSMTP mensajero= new ClienteSMTP();
             mensajero.enviarMensaje(correo, "","El producto fue registrado exitosamente.");
         } catch (Exception e) {
@@ -874,8 +877,23 @@ public class ComandoFirestill {
         }
     }
 
-    private void editarProducto(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void editarProducto(String data) {
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            Integer categoria_id = getInteger_NOT_NULL(values[1]);
+            String nombre = getString_NOT_NULL(values[2]);
+            Float precio = getFloat_NOT_NULL(values[3]);
+            String descripcion = getString(values[4]);
+            NegocioProducto negocioProducto= new NegocioProducto();
+            negocioProducto.editar2(id,categoria_id,nombre, precio,descripcion);
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","El producto fue editado exitosamente.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
 
     private void eliminarProducto(String data) {
@@ -1014,6 +1032,21 @@ public class ComandoFirestill {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    private void finalizarEdicion(String data){
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            NegocioContrato negocioContrato= new NegocioContrato();
+            negocioContrato.finalizarEdicion(id);
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","El periodo de edicion del contrato fue finalizado.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+    }
+    
     private void eliminarContrato(String data) {
         String[] values = data.split(",");
         try {
@@ -1080,7 +1113,21 @@ public class ComandoFirestill {
     }
 
     private void editarSucursal(String data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            Integer contrato_id= getInteger_NOT_NULL(values[1]);
+            String nombre = getString_NOT_NULL(values[2]);
+            String direccion = getString_NOT_NULL(values[3]);
+            NegocioSucursal negocioSucursal= new NegocioSucursal();
+            negocioSucursal.editar(id,contrato_id,nombre,direccion);
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","La sucursal fue editada exitosamente.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
 
     private void eliminarSucursal(String data) {
@@ -1141,7 +1188,7 @@ public class ComandoFirestill {
             String unidad_medida = getString(values[5]);
             Integer ano_fabricacion= getInteger_NOT_NULL(values[6]);
             Float capacidad= getFloat_NOT_NULL(values[7]);
-            String ubicacion= getString_NOT_NULL(values[7]);
+            String ubicacion= getString_NOT_NULL(values[8]);
             NegocioEquipo negocioEquipo= new NegocioEquipo();
             Integer id = negocioEquipo.registrar(sucursal_id, tipo_clasificacion_id, marca_clasificacion_id, nro_serie, descripcion, unidad_medida, ano_fabricacion, capacidad, ubicacion);
             ClienteSMTP mensajero= new ClienteSMTP();
@@ -1154,7 +1201,27 @@ public class ComandoFirestill {
     }
 
     private void editarEquipo(String data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] values = data.split(",");
+        try {
+            Integer id= getInteger_NOT_NULL(values[0]);
+            Integer sucursal_id = getInteger_NOT_NULL(values[1]);
+            Integer tipo_clasificacion_id = getInteger_NOT_NULL(values[2]);
+            Integer marca_clasificacion_id = getInteger_NOT_NULL(values[3]);
+            String nro_serie = getString_NOT_NULL(values[4]);
+            String descripcion = getString(values[5]);
+            String unidad_medida = getString(values[6]);
+            Integer ano_fabricacion= getInteger_NOT_NULL(values[7]);
+            Float capacidad= getFloat_NOT_NULL(values[8]);
+            String ubicacion= getString_NOT_NULL(values[9]);
+            NegocioEquipo negocioEquipo= new NegocioEquipo();
+            negocioEquipo.editar(id, sucursal_id, tipo_clasificacion_id, marca_clasificacion_id, nro_serie, descripcion, unidad_medida, ano_fabricacion, capacidad, ubicacion);
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","El equipo fue editado exitosamente.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
     }
 
     private void eliminarEquipo(String data) {
@@ -1206,8 +1273,44 @@ public class ComandoFirestill {
     // 12 Ficha Tecnica
     
     private void registrarFichaTecnica(String data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        String[] values = data.split(",");
+        try {
+            Integer trabajador_id = getInteger_NOT_NULL(values[0]);
+            Integer equipo_id = getInteger_NOT_NULL(values[1]);
+            Float carga = getFloat(values[1]);
+            String observacion = getString(values[2]);
+            String resultado = getString_NOT_NULL(values[3]);
+            
+            int contador=1;
+            while (contador<=14 && (contador-1+4)<=values.length) {
+                Integer nro_pieza=getInteger_NOT_NULL(values[contador-1+4]);
+                if(nro_pieza>=1 && nro_pieza<=14){
+                    contador++;
+                }else{
+                    new Exception();
+                }
+                
+            }
+            
+            NegocioFichaTecnica negocioFichaTecnica= new NegocioFichaTecnica();
+            Integer id = negocioFichaTecnica.registrar(ejecutor.getId(), equipo_id, carga, observacion, resultado);
+            
+            contador=1;
+            while (contador<=14 && (contador-1+4)<=values.length) {
+                Integer nro_pieza=getInteger_NOT_NULL(values[contador-1+4]);
+                negocioFichaTecnica.editar(id, nro_pieza);
+            }
+            
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","La ficha de inspeccion fue registrada exitosamente.");
+        } catch (Exception e) {
+            System.out.println("Error al catch de firestill");
+            ClienteSMTP mensajero= new ClienteSMTP();
+            mensajero.enviarMensaje(correo, "","Verifique los datos enviados.");
+        }
+    
+        //Integer trabajador_id, Integer equipo_id,Float carga, String observacion,String resultado
+    }    
 
     private void eliminarFichaTecnica(String data) {
         String[] values = data.split(",");
@@ -1406,7 +1509,12 @@ public class ComandoFirestill {
     
     public static void main(String[] args) {
         ComandoFirestill c= new ComandoFirestill();
-        c.ejecutarComando("rodrigo.abasto21@gmail.com", "mostrarMarcaClasificacion:2");
+        c.ejecutarComando("nath.1475369@gmail.com", "registrarMarcaClasificacion:nueva marca");
+        c.ejecutarComando("nath.1475369@gmail.com", "editarMarcaClasificacion:1, otra marca");
+        c.ejecutarComando("nath.1475369@gmail.com", "mostrarMarcaClasificacion:2");
+        c.ejecutarComando("nath.1475369@gmail.com", "eliminarMarcaClasificacion:");
+        c.ejecutarComando("nath.1475369@gmail.com", "mostrarMarcaClasificacion:2");
+        c.ejecutarComando("nath.1475369@gmail.com", "mostrarMarcaClasificacion:2");
     }
     
 }

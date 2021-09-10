@@ -8,6 +8,7 @@ package Negocio;
 import Datos.DatosBajaProducto;
 import Datos.DatosProducto;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -73,23 +74,59 @@ public class NegocioBajaProducto {
     }
     
     public String obtenerBajaProductosHTML(){
-        DatosBajaProducto datosBajaProducto= new DatosBajaProducto();
-        ArrayList<DatosBajaProducto> lista = datosBajaProducto.obtener();
+        DatosBajaProducto datosBajaProducto = new DatosBajaProducto();
+        ArrayList<DatosBajaProducto> lista= obtenerBajasProducto();
         String html="";
         
         String contenido="";
-        for (DatosBajaProducto tipoClasificacion : lista) {
+        for (DatosBajaProducto bajaProducto : lista) {
+                Integer id =bajaProducto.getId();
+                Date fecha =bajaProducto.getFecha();
+                String motivo =bajaProducto.getMotivo();
+                Integer cantidad =bajaProducto.getCantidad(); 
+                Integer producto_id =bajaProducto.getProducto_id();
+                
+                DatosProducto producto= new DatosProducto();
+                String producto_nombre= producto.obtener(producto_id).getNombre();
+                
             
-        }       
+            contenido+="<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
+                       "<td >"+producto_nombre+"</td>\n" +
+                       "<td >"+cantidad+"</td>\n" +       
+                       "<td >"+fecha+"</td>\n" +
+                       "<td >"+motivo+"</td>\n" +        
+                       "<td >"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarBajaProducto:"+id+"\">Mostrar </a>\n" +
+                             "</li>"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= eliminarBajaProducto:"+id+"\">Eliminar </a>\n" +
+                             "</li>"+
+                       "</td>\n" +
+                       "</tr>\n";
+        }
+        
+        html="<h2>Baja de productos</h2>"+
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarBajaProducto: PRODUCTO_ID, CANTIDAD, MOTIVO\">Registrar Baja Producto</a><br>" + 
+            "<table class=\"tablaTecno\">\n" +
+            "  <thead>\n" +
+            "    <tr class=\"trCamposTecno\">\n" +
+            "      <th >ID</th>\n"+
+            "      <th class=\"thcolxTecno\">Producto</th>\n" +
+            "      <th class=\"thcolxTecno\">Cantidad</th>\n" +
+            "      <th class=\"thcolxTecno\">Fecha</th>\n" +
+            "      <th class=\"thcolxTecno\">Motivo</th>\n" +    
+            "      <th class=\"thcolxTecno\">Opciones</th>\n" +                
+            "    </tr>\n" +
+            "  </thead>\n" +
+            "  <tbody>\n" +    
+                contenido+
+            "  </tbody>\n" +
+            "</table>";
+        
+        
         return html;
     }
-    
-    
-    public static void main(String[] args) {
         
-            NegocioTipoClasificacion n= new NegocioTipoClasificacion();
-            n.editar(50, "dasdsad");
-        
-        
-    }
 }

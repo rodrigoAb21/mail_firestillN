@@ -59,10 +59,56 @@ public class NegocioSucursal {
     }
     
     public String obtenerSucursalesHTML(){
-        String html= " ";
+        DatosSucursal datosSucursal = new DatosSucursal();
+        ArrayList<DatosSucursal> lista= obtenerSucursales();
+        String html="";
+        
+        String contenido="";
+        for (DatosSucursal sucursal : lista) {
+            Integer id= sucursal.getId();
+            String nombre= sucursal.getNombre();
+            Integer contrato_id= sucursal.getContrato_id();
+            String direccion=sucursal.getDireccion();
+            
+            contenido+="<tr class=\"trDatosTecno\">\n" +
+                       "<td class=\"tdcol1Tecno\">"+id+"</td>\n" +
+                       "<td >"+nombre+"</td>\n" +
+                       "<td >"+contrato_id+"</td>\n" + 
+                       "<td >"+direccion+"</td>\n" +
+                       "<td >"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= mostrarSucursal:"+id+"\">Mostrar </a>\n" +
+                             "</li>"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= editarSucursal:"+id+", "+contrato_id+", "+nombre+", "+direccion+"\">Editar </a>\n" +
+                             "</li>"+
+                             "<li>"+
+                             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= eliminarSucursal:"+id+"\">Eliminar </a>\n" +
+                             "</li>"+
+                       "</td>\n" +
+                       "</tr>\n";
+        }
+        
+        html="<h2>Sucursales</h2>"+
+             "<a href=\"mailto:grupo13sc@tecnoweb.org.bo?subject= registrarSucursal:CONTRATO_ID, NOMBRE, DIRECCION  \">Registrar Sucursal</a><br>" +
+             "<table class=\"tablaTecno\">\n" +
+            "  <thead>\n" +
+            "    <tr class=\"trCamposTecno\">\n" +
+            "      <th >ID</th>\n"+
+            "      <th class=\"thcolxTecno\">Nombre</th>\n" +
+            "      <th class=\"thcolxTecno\">Contrato</th>\n" + 
+            "      <th class=\"thcolxTecno\">Direccion</th>\n" + 
+            "      <th class=\"thcolxTecno\">Opciones</th>\n" +                
+            "    </tr>\n" +
+            "  </thead>\n" +
+            "  <tbody>\n" +    
+                contenido+
+            "  </tbody>\n" +
+            "</table>";
+        
+        
         return html;
     }
-    
     
     
     
