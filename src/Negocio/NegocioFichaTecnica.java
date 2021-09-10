@@ -108,12 +108,52 @@ public class NegocioFichaTecnica {
     }
     
     public String obtenerFichaTecnicaHTML(int id){
-        DatosFichaTecnica datosFichaTecnica= new DatosFichaTecnica();
-        datosFichaTecnica = datosFichaTecnica.obtener(id);
-        String html="";
-        
-        //faltaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-        
+        DatosFichaTecnica datosFichaTecnica= obtenerFichaTecnica(id);
+        DatosTrabajador datosTrabajador = new DatosTrabajador().obtener(datosFichaTecnica.getTrabajador_id());
+
+        String html = "<h2>Ver Ficha Tecnica: "+datosFichaTecnica.getId()+"</h2>\n" +
+                "<div class=\"tecno_recuadro\">\n" +
+                "    <label><b>Fecha</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.getFecha()+"</p>\n" +
+                "    <label><b>Responsable</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosTrabajador.getNombre() + " " + datosTrabajador.getApellido() +"</p>\n" +
+                "    <label><b>Caño Pesca</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.geteCanioPesca()+"</p>\n" +
+                "    <label><b>Zuncho</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.geteZuncho()+"</p>\n" +
+                "    <label><b>Chasis</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.geteChasis()+"</p>\n" +
+                "    <label><b>Rueda</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.geteRueda()+"</p>\n" +
+                "    <label><b>Rosca</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.geteRosca()+"</p>\n" +
+                "    <label><b>Manguera</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.geteManguera()+"</p>\n" +
+                "    <label><b>Valvula</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.geteValvula()+"</p>\n" +
+                "    <label><b>Tobera</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.geteTobera()+"</p>\n" +
+                "    <label><b>Robinete</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.geteRobinete()+"</p>\n" +
+                "    <label><b>Palanca</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.getePalanca()+"</p>\n" +
+                "    <label><b>Manometro</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.geteManometro()+"</p>\n" +
+                "    <label><b>Vastago</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.geteVastago()+"</p>\n" +
+                "    <label><b>Difusor</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.geteDifusor()+"</p>\n" +
+                "    <label><b>Disco</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.geteDisco()+"</p>\n" +
+                "    <label><b>Carga</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.getCarga()+"</p>\n" +
+                "    <label><b>Resultado</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.getResultado()+"</p>\n" +
+                "    <label><b>Observacion</b> </label>\n" +
+                "    <p class=\"tecno_input\">"+datosFichaTecnica.getObservacion()+"</p>\n" +
+                "</div>\n";
+
+
         return html;
         
     }
