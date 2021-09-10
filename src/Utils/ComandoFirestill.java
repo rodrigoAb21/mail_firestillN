@@ -580,9 +580,9 @@ public class ComandoFirestill {
             System.out.println("nombre: "+nombre);
             String apellido = getString_NOT_NULL(values[1]);
             System.out.println("apellido: "+apellido);
-            String carnet = getString_NOT_NULL(values[2]);
+            String carnet = getCarnet_NOT_NULL(values[2]);
             System.out.println("carnet: "+carnet);
-            String telefono = getString(values[3]);
+            String telefono = getNroTelefono(values[3]);
             System.out.println("telefono: "+telefono);
             String direccion = getString(values[4]);
             System.out.println("direccion: "+direccion);
@@ -1486,6 +1486,27 @@ public class ComandoFirestill {
         }
         Date fecha=new SimpleDateFormat("dd/MM/yyyy").parse(texto.trim());
         return fecha;
+    }
+    
+    private String getCarnet_NOT_NULL(String texto)throws Exception{
+        String carnet=texto.trim();
+        if(esNulo(carnet) || carnet.length()>10){
+            throw new Exception();
+        }
+        return carnet;
+    }
+    
+    private String getNroTelefono(String texto)throws Exception{
+        String valor=null;
+        if(!esNulo(texto)){
+            int numero=Integer.parseInt(texto.trim());
+            String cadena=Integer.toString(numero);
+            if(cadena.length()==7 || cadena.length()==8){
+                return cadena;
+            }
+            throw new Exception();
+        }
+        return valor;
     }
     
     private Integer getInteger(String texto){
